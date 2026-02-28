@@ -1,0 +1,67 @@
+Completed:
+已完成：
+
+ ✅ Project Initialization & Architecture Setup (app.py, core/, pages/)
+   ✅ 项目初始化与架构搭建 (app.py, core/, pages/)
+ ✅ Dependency Management (requirements.txt)
+   ✅ 依赖管理 (requirements.txt)
+ ✅ Core Configuration Manager (Config Manager)
+   ✅ 核心配置管理器 (Config Manager)
+ ✅ Source Manager (Source Manager)
+   ✅ 数据源管理器 (Source Manager)
+ ✅ Streamlit UI Skeleton (Sidebar, Navigation)
+   ✅ Streamlit UI 骨架 (Sidebar, Navigation)
+ ✅ Settings Page (LLM, Schedule, Webhook Configuration Form)
+   ✅ 设置页面 (LLM, Schedule, Webhook 配置表单)
+ ✅ Source Management Page (CRUD RSS/Web Sources)
+   ✅ 数据源管理页面 (增删改查 RSS/Web 源)
+ ✅ Core Fetcher Module (Fetcher - RSS & Web Scraper)
+   ✅ 核心抓取模块 (Fetcher - RSS & Web Scraper)
+ ✅ LLM Engine (OpenAI Interface Wrapper, 30-word Chinese Summary Prompt)
+   ✅ LLM 引擎 (OpenAI 接口封装，30字中文总结 Prompt)
+ ✅ AI Image Generation Interface (Image Generator - DALL-E 3)
+   ✅ AI 配图接口 (Image Generator - DALL-E 3)
+ ✅ Daily News Generation Logic (Fetcher -> Summarize -> Markdown)
+   ✅ 日报生成逻辑 (Fetcher -> Summarize -> Markdown)
+ ✅ Data Persistence (Markdown + Front Matter)
+   ✅ 数据持久化 (Markdown + Front Matter)
+ ✅ Workspace Interface (Dual-column Editor + Real-time Preview)
+   ✅ 工作台界面 (双栏编辑器 + 实时预览)
+ ✅ Enterprise WeChat Push Function (Pusher Webhook)
+   ✅ 企业微信推送功能 (Pusher Webhook)
+ ✅ Background Scheduler (Scheduler - Auto Fetch & Push)
+   ✅ 后台调度器 (Scheduler - 自动抓取与推送)
+ ✅ Source Testing & Connectivity Check (Test Fetch & Connectivity Check)
+   ✅ 数据源测试与连通性验证 (Test Fetch & Connectivity Check)
+18. ✅ AI Source Discovery (AI Source Discovery)
+    18. ✅ AI 数据源发现 (AI Source Discovery)
+19. ✅ Source Logo Support (Source Logo)
+    19. ✅ 数据源 Logo 支持 (Source Logo)
+20. ✅ More LLM Providers Support (DeepSeek, Moonshot, Custom)
+    20. ✅ 更多 LLM 提供商支持 (DeepSeek, Moonshot, Custom)
+21. ✅ LLM Module Refactoring (Split LLM Module)
+    21. ✅ LLM 模块重构 (Split LLM Module)
+22. ✅ Markdown V2 Format Optimization (No Images)
+    22. ✅ Markdown V2 格式优化 (No Images)
+23. ✅ Frontend Interface Optimization (UI Cleanup)
+    23. ✅ 前端界面优化 (UI Cleanup)
+24. ✅ Default Image Support (Default Image Fallback)
+    24. ✅ 默认图片支持 (Default Image Fallback)
+
+In Progress:
+进行中：
+
+ 🔄 Integration Testing & Optimization
+   🔄 集成测试与优化
+
+Next Steps:
+接下来：
+
+ 📋 Multi-user/Cloud Deployment Support (Phase 2)
+   📋 多用户/云端部署支持 (Phase 2)
+
+Known Bugs:
+已知 Bug：
+
+ ⚠️ Image generation is slow and costly; recommended to enable only for important news.
+   ⚠️ 图片生成速度较慢，且消耗较大，建议仅对重要新闻开启。

@@ -1,0 +1,1540 @@
+[
+  {
+    "id": "a0dc4529-0bdc-4f06-a454-87f044b56a46",
+    "name": "界面新闻: 财经",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jiemian/finance",
+    "enabled": true,
+    "last_crawl_time": null,
+    "group": "All"
+  },
+  {
+    "id": "d67eee55-e556-45f2-be33-f171446cfff2",
+    "name": "iDaily 每日环球视野",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/idaily/today",
+    "group": "All",
+    "enabled": false,
+    "last_crawl_time": null
+  },
+  {
+    "id": "953c0555-2705-4f3d-a771-79654288a3fc",
+    "name": "网易新闻 / 今日关注",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/netease/today",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d356e1e7-ded3-44fd-9dea-83ac8b60c3ca",
+    "name": "联合早报 / 中国",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/zaobao/realtime/china",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "fcd30091-c754-4444-91ec-ea64c10c219e",
+    "name": "联合早报 / 国际",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/zaobao/realtime/world",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "4a793af5-352d-4562-a84d-4722fbe007fe",
+    "name": "南方周末 / 新闻",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/infzm/news",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "45359d17-7b0a-41e7-87ad-16cb011dfb7f",
+    "name": "南方周末 / 推荐",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/infzm/recommends",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e998ef44-4f46-4371-9c4a-c5d86c94ae77",
+    "name": "澎湃新闻",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/thepaper",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "9ab099fd-2e9d-4058-badf-bbc26b2365ca",
+    "name": "中国日报 / 双语新闻",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/chinadaily/dual",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "43b74196-c6b4-4fba-b06e-939866fd0c17",
+    "name": "中国日报 / 财经",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/chinadaily/caijing",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "43bc8796-1f3f-4fa1-a227-a3d450a6a962",
+    "name": "界面新闻：新闻",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jiemian/news",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d5074736-ff05-4fee-b0cb-82faba7e3c61",
+    "name": "数字尾巴",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/dgtle",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cff7f78b-1a3f-40bc-a6aa-7ed6079c0ebc",
+    "name": "36 氪",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/36kr",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "4fee9ac7-914b-4cf4-aca0-1c7aab35b70f",
+    "name": "cnBeta",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/cnbeta",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "9f0bb423-12b2-4dc6-b958-8f0acfc184a2",
+    "name": "IT 之家",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/ithome/it",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "ac55823b-b915-48da-9c6e-658d6cbd1974",
+    "name": "MIT 科技评论 / 本周热榜",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/mittrchina/hot",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "51049aa1-dfbf-4dc4-b4ae-a40ad930dded",
+    "name": "Readhub / 热门话题",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/readhub/topic",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d4cf8419-c155-49e9-8f8c-0b0e779e850e",
+    "name": "Readhub / 每日早报",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/readhub/daily",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c17624aa-e4bf-4c76-90bc-cadd891396fa",
+    "name": "Readhub / 区块链快讯",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/readhub/blockchain",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "9036bbce-7b9d-4626-83b3-1adda4f0cad4",
+    "name": "爱范儿",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/ifanr",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f5f50ce5-0cfa-4bec-b6a4-6e1a04b37ffc",
+    "name": "果壳网 / 科学人",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/guokr/scientific",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b36d3fc6-a2c3-4610-8442-fe7f80981c7f",
+    "name": "虎嗅",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/huxiu",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f9cad624-04aa-4df9-bac8-702fc0dc67a1",
+    "name": "机核",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/gcores",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5865b880-8de5-4c15-b8c3-6c0fe9d7158f",
+    "name": "快科技",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/mydrivers",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d4db178a-22bc-4663-8f01-aa45a8be8c70",
+    "name": "雷峰网",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/leiphone",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "04023929-54dc-4e54-92f4-cfc40e115b1a",
+    "name": "软餐 - 新鲜软件资讯",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/ruancan",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "dbd44526-b225-4abd-88d3-7a71ac90ac76",
+    "name": "少数派",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/sspai",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "183508b5-3390-4492-924b-d2109c39a141",
+    "name": "少数派 / Matrix",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/ssapi/matrix",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f15f5fa8-4bdf-4bb8-8860-f1d00cd4e5f0",
+    "name": "新浪专栏 / 创事记",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/sina/csj",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "dcbecc25-bea7-46ec-8837-300395b39858",
+    "name": "极客公园",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/geekpark",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "1f852278-0ae6-4cbb-a4d2-be3f7aa7550c",
+    "name": "小众软件",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/appinn",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "212f8363-ed72-4c4b-a641-f3dcace16740",
+    "name": "超能网",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/expreview",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0f488db5-d550-4fbb-9820-a9063341c21e",
+    "name": "钛媒体",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/tmtpost",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c59639e2-786a-49f8-a126-91640d9d0b00",
+    "name": "猎云网",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/lieyunwang",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "978c5a15-61c2-44b9-8295-3348b8e9f9c1",
+    "name": "品玩",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/pingwest",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "2ada272c-0c01-46be-83be-a28c605f6a5e",
+    "name": "湾区日报",
+    "type": "rss",
+    "url": "https://wanqu.co/feed/",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "444a3bc7-b070-492e-9f10-b4897e09b9d0",
+    "name": "晚晴幽草轩",
+    "type": "rss",
+    "url": "https://www.jeffjade.com/atom.xml",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "29ad70ec-1d6b-499a-8059-968d0ee50c98",
+    "name": "阮一峰的网络日志",
+    "type": "rss",
+    "url": "https://www.ruanyifeng.com/blog/atom.xml",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cc203e39-b0c7-4af8-9d17-79ad70608d4b",
+    "name": "知乎日报",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/zhihu/daily",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "aad4c687-8e8f-4f43-91c5-760392fc9b23",
+    "name": "知乎每日精选",
+    "type": "rss",
+    "url": "http://www.zhihu.com/rss",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "ec8a87b9-5ef6-4598-b431-0210bde80caf",
+    "name": "简书 / 首页",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jianshu/home",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "ace69e6c-9423-4bd7-810e-3a838bc25143",
+    "name": "简书：热门",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jianshu/trending/weekly",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "6cc6b66d-e332-4c24-b4e7-6187d6c985c6",
+    "name": "知乎热榜",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/zhihu/hotlist",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "2a0558c5-9e84-4032-849f-238954158099",
+    "name": "人人都是产品经理",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/woshipm/popular",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "a5dc4394-bf65-4b02-9cde-f5b84d480125",
+    "name": "维基百科优良条目",
+    "type": "rss",
+    "url": "https://zh.wikipedia.org/w/api.php?action=featuredfeed&feed=good&feedformat=atom",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "69971332-73f6-4549-8a20-8cf3d7bc72d6",
+    "name": "BBC 英语教学",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/bbc/learningenglish",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "2f10f985-f4fb-4d45-995b-6c2bff177935",
+    "name": "观止·每日一文",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/meiriyiwen",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b21c3827-4b64-46a3-8333-040643019d01",
+    "name": "豆瓣最受欢迎的影评",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/douban/review/movie",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f96e91c0-a928-44a3-961e-cf289f160c8b",
+    "name": "豆瓣最受欢迎的书评",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/douban/review/book",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "2eb1a2ef-6fb0-45d1-af97-f2a59584e02b",
+    "name": "雪球 / 今日话题",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/xueqiu/today",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b0a708e4-de43-4d45-99e1-5d85dc2669f6",
+    "name": "雪球 / 热帖",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/xueqiu/hot",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b7f9cb1f-6cae-4319-a351-d55f51c1147f",
+    "name": "财富中文网",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/fortunechina",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "a341906a-587a-48b5-8862-39ecfff2a9db",
+    "name": "财富中文网 / 商业",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/fortunechina/shangye",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f06cbe5d-f33f-4690-a371-5e5f313a3d91",
+    "name": "财富中文网 / 领导力",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/fortunechina/lindgaoli",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "a8fd1bb2-f9ed-4f21-8134-49d9302f07ba",
+    "name": "财富中文网 / 科技",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/fortunechina/keji",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "42ad3b98-1a61-47a9-bd18-8a4aa486e7ac",
+    "name": "财富中文网 / 研究",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/fortunechina/report",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "70521aba-01da-4fe3-adcc-36d7093d5002",
+    "name": "经济日报",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jingjiribao",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "528ab6e7-51fc-4ca5-8e6c-0b57b24c5c68",
+    "name": "喷嚏网 / 财经风云",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/dapenti/caijing",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "614ef859-61c3-4ddd-acbe-f2e924f3ee0a",
+    "name": "经济观察网",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/eeo",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "bf2a75d4-5a98-4179-8c47-dd6125939c96",
+    "name": "界面新闻：商业",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jiemian/business",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5660f366-9c9a-4e95-80eb-fa3c5d2add42",
+    "name": "界面新闻：财经",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jiemian/finance",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "99f3e478-d730-40ac-ba85-b0c9a41f41eb",
+    "name": "微博 / 热搜榜",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/weibo/search/hot",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "caf74afb-3150-4cb7-b80e-dff025723f7e",
+    "name": "煎蛋",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/jiandan",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5e8b07f9-b74c-455c-a78c-4e00a5ba9dbc",
+    "name": "理想生活实验室",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/toodaylab",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "55208d29-e5f0-4bdf-b314-216b0c4f4b80",
+    "name": "InfoQ 中文",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/infoq/recommend",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "471d48f2-3fd2-4129-bde0-cea1aa09f8b7",
+    "name": "Readhub / 开发者资讯",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/readhub/technews",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c49c60fd-92ec-4619-9011-2e45438eebae",
+    "name": "Linux 中国",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/linux.cn",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5225a165-da05-47e8-938e-fbe56d66062a",
+    "name": "开发者头条",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/toutiao.io",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "ca953114-247d-4822-9356-9b42965c5418",
+    "name": "FreeBuf 关注黑客",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/freebuf",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "160803de-a200-4868-a12e-698045492dcb",
+    "name": "Aljazeera 半岛网 / 新闻",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/aljazeera/news",
+    "group": "All",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "7556a2d1-15ae-4d14-993c-38dc7733fb42",
+    "name": "SBS 中文",
+    "type": "rss",
+    "url": "https://plink.anyfeeder.com/sbs/chinese",
+    "group": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "6c601c16-fbc0-4562-98da-8cbab9d2dc89",
+    "name": "爱范儿",
+    "type": "rss",
+    "url": "https://www.ifanr.com/feed",
+    "group": "tech",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3a3a97eb-540f-4f2b-8690-5a808f5351fc",
+    "name": "AI-TechPark",
+    "type": "rss",
+    "url": "https://ai-techpark.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "7be84fd4-0117-4695-8698-da9da0107f4a",
+    "name": "AI Accelerator Institute",
+    "type": "rss",
+    "url": "https://aiacceleratorinstitute.com/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "48e37b9e-9236-498f-89b2-94ea68c3ecfd",
+    "name": "AIhub",
+    "type": "rss",
+    "url": "https://aihub.org/feed?cat=-473",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "44d6cc7b-d30a-4343-b92c-9243ca18dc49",
+    "name": "AI Weirdness",
+    "type": "rss",
+    "url": "https://www.aiweirdness.com/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cef107e1-38f5-4f40-b14c-3eb62c66d21e",
+    "name": "AWS Machine Learning Blog",
+    "type": "rss",
+    "url": "https://aws.amazon.com/blogs/machine-learning/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5cc5fa04-2601-462a-9725-f16404bfd9b8",
+    "name": "Amazon Science Homepage",
+    "type": "rss",
+    "url": "https://www.amazon.science/index.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "fa47577f-34ff-42e9-bbaf-c87f98de274b",
+    "name": "Anaconda Blog",
+    "type": "rss",
+    "url": "https://www.anaconda.com/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c3118297-0e0f-413b-b402-d67bc145e793",
+    "name": "Analytics India Magazine",
+    "type": "rss",
+    "url": "https://analyticsindiamag.com/feed/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b314117a-27ed-4550-86e8-d3d4dcb729a6",
+    "name": "Ars Technica",
+    "type": "rss",
+    "url": "https://feeds.arstechnica.com/arstechnica/index",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "2f6d1b47-9acf-4934-b565-91221b1ddcc9",
+    "name": "AI News",
+    "type": "rss",
+    "url": "https://www.artificialintelligence-news.com/feed/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "7e4111c9-f509-4a2b-b8b1-8ea707472aca",
+    "name": "stat.ML updates on arXiv.org",
+    "type": "rss",
+    "url": "https://arxiv.org/rss/stat.ML",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "5471bb68-0576-4f28-9e79-d196a8034359",
+    "name": "cs.CL updates on arXiv.org",
+    "type": "rss",
+    "url": "https://arxiv.org/rss/cs.CL",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "708d3033-8872-44e8-a17c-4defa9c5cf67",
+    "name": "cs.CV updates on arXiv.org",
+    "type": "rss",
+    "url": "https://arxiv.org/rss/cs.CV",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e185c333-b634-4d17-879d-4cbcc5753374",
+    "name": "cs.LG updates on arXiv.org",
+    "type": "rss",
+    "url": "https://arxiv.org/rss/cs.LG",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e7840dcc-20f4-4e80-8916-4fb8518cc4ad",
+    "name": "AssemblyAI Blog",
+    "type": "rss",
+    "url": "https://www.assemblyai.com/blog/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "760e9bf5-b797-4f29-a275-95cde5c7a04a",
+    "name": "Benzinga - Podcasts",
+    "type": "rss",
+    "url": "https://www.benzinga.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "852d8435-4b7d-4f7e-9335-5decb80fb965",
+    "name": "ML@B Blog",
+    "type": "rss",
+    "url": "https://ml.berkeley.edu/blog/rss.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d1973c9e-ee6c-44b8-8689-abaabdc4f6c2",
+    "name": "The Berkeley Artificial Intelligence Research Blog",
+    "type": "rss",
+    "url": "https://bair.berkeley.edu/blog/feed.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "6ccf0418-3607-4a20-bb81-a5e34ebb0be9",
+    "name": "Python Insider",
+    "type": "rss",
+    "url": "https://feeds.feedburner.com/PythonInsider",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3a388048-c5a4-4192-850a-7b6920041992",
+    "name": "Nicholas Carlini",
+    "type": "rss",
+    "url": "https://nicholas.carlini.com/writing/feed.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0b015272-57ba-44dc-8529-f722c56abbee",
+    "name": "Machine Learning Blog | ML@CMU",
+    "type": "rss",
+    "url": "https://blog.ml.cmu.edu/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "30399f81-0a19-4f5d-b312-fce8dab8fe6c",
+    "name": "Crunchbase News",
+    "type": "rss",
+    "url": "https://news.crunchbase.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f627ac23-2f69-4d0f-bbb5-9daea16a5873",
+    "name": "DagsHub Blog",
+    "type": "rss",
+    "url": "https://dagshub.com/blog/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e400defa-65ea-478e-a5c3-c08b64892624",
+    "name": "Dataconomy",
+    "type": "rss",
+    "url": "https://dataconomy.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "257374c4-189a-4094-9dba-85f3f720d9f3",
+    "name": "Datafloq",
+    "type": "rss",
+    "url": "https://datafloq.com/feed/?post_type=post",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "f180ccf9-6cc8-4e8d-8a40-00cc3ea001c5",
+    "name": "Datanami",
+    "type": "rss",
+    "url": "https://www.datanami.com/feed/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0914b4dd-0035-4022-809f-ac73a9cc535d",
+    "name": "David Stutz",
+    "type": "rss",
+    "url": "https://davidstutz.de/category/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "a8864546-d5f7-4eb9-aca1-5730e2a3b133",
+    "name": "Deep & Shallow",
+    "type": "rss",
+    "url": "https://deep-and-shallow.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3dc97d14-121c-466c-9363-9c50c08796e5",
+    "name": "Deephaven Blog",
+    "type": "rss",
+    "url": "https://deephaven.io/blog/rss.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "8fc31e5f-143c-4b83-bf6a-519646650c58",
+    "name": "Deepmind Blog",
+    "type": "rss",
+    "url": "https://deepmind.com/blog/feed/basic/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "8718127e-95d3-4356-aaf0-7252b381dfc1",
+    "name": "DEV Community",
+    "type": "rss",
+    "url": "https://dev.to/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e1805aa1-1fc0-48be-9bf7-8ceaaa460f14",
+    "name": "Digital Journal",
+    "type": "rss",
+    "url": "https://www.digitaljournal.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "655d9213-a7c4-4c85-a0ae-b424545a900a",
+    "name": "Distill",
+    "type": "rss",
+    "url": "https://distill.pub/rss.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c89186d8-29ff-4813-ade1-2b76a9a46631",
+    "name": "Elastic Blog",
+    "type": "rss",
+    "url": "https://www.elastic.co/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "76a7ff71-fa87-4e53-b01e-c26284540d9b",
+    "name": "Explosion",
+    "type": "rss",
+    "url": "https://explosion.ai/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c67e5fa2-6955-4b43-adef-a986fcaa075b",
+    "name": "fast.ai",
+    "type": "rss",
+    "url": "https://www.fast.ai/index.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "8f352c4b-dc4b-4bf9-8ba5-77bda9f6f562",
+    "name": "fast.ai (fallback)",
+    "type": "rss",
+    "url": "http://www.fast.ai/atom.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cce1956c-ff5b-4b16-806a-95819339f372",
+    "name": "Future - Data Archives",
+    "type": "rss",
+    "url": "https://future.com/category/data/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d064ea5f-0cd6-42bc-b5f2-680250addd8e",
+    "name": "Google AI Blog",
+    "type": "rss",
+    "url": "http://googleaiblog.blogspot.com/atom.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "1eac7f39-83f1-41af-8ed8-dd786d0e6f12",
+    "name": "Gradient Flow",
+    "type": "rss",
+    "url": "https://gradientflow.com/feed/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "6fdf9e65-743c-4ce6-8c56-796c646af107",
+    "name": "Hacker Noon - ai",
+    "type": "rss",
+    "url": "https://hackernoon.com/tagged/ai/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "7b1b0f33-e45d-47a6-b277-4986d3f2941b",
+    "name": "HealthTech Magazine",
+    "type": "rss",
+    "url": "https://feeds.feedburner.com/HealthTechMagazine",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "11e4abe3-84b0-4d66-858f-5159aaa3ffe2",
+    "name": "Hugging Face - Blog",
+    "type": "rss",
+    "url": "https://huggingface.co/blog/feed.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cdf49f13-080e-411f-8f86-1456e41901f2",
+    "name": "Chip Huyen",
+    "type": "rss",
+    "url": "https://huyenchip.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "1d149db0-ad3c-42d9-8743-9b3e543b5c65",
+    "name": "IEEE Spectrum - Artificial Intelligence",
+    "type": "rss",
+    "url": "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e5efe326-6493-4042-b2e9-7eba177d68dc",
+    "name": "InfoQ - AI, ML & Data Engineering",
+    "type": "rss",
+    "url": "https://feed.infoq.com/ai-ml-data-eng/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "1d5dff55-58b9-4fe1-a057-a0dfa69b602a",
+    "name": "InfoWorld Analytics",
+    "type": "rss",
+    "url": "https://www.infoworld.com/category/analytics/index.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "73562560-87c8-4b3e-8d25-f845fbd5dec8",
+    "name": "InfoWorld Machine Learning",
+    "type": "rss",
+    "url": "https://www.infoworld.com/category/machine-learning/index.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "67943dbc-9641-4a5d-a0be-9d73b2f866d3",
+    "name": "insideBIGDATA",
+    "type": "rss",
+    "url": "https://insidebigdata.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "50ee843e-db36-4c22-9b4a-df35a3f87be8",
+    "name": "Import AI",
+    "type": "rss",
+    "url": "https://jack-clark.net/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "9f9beed7-e0ba-4972-9d40-40ae7b93b7ad",
+    "name": "JMLR",
+    "type": "rss",
+    "url": "https://www.jmlr.org/jmlr.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0bfd7a1c-019b-4d77-a03a-22e42046a6fa",
+    "name": "KDnuggets",
+    "type": "rss",
+    "url": "https://www.kdnuggets.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c53e179a-17e1-44dd-a11e-557127e1e3b7",
+    "name": "Lambda Blog",
+    "type": "rss",
+    "url": "https://lambdalabs.com/blog/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "e481f0f4-c625-46e0-948d-ed8ef93fdcf0",
+    "name": "Last Week in AI",
+    "type": "rss",
+    "url": "https://lastweekin.ai/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3a07847f-f00e-4674-a7b6-f7e5750ac7e7",
+    "name": "Machine Learning Mastery",
+    "type": "rss",
+    "url": "https://machinelearningmastery.com/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "eff90b3f-fee7-4260-aab4-17ae6a6b3e2e",
+    "name": "MarkTechPost",
+    "type": "rss",
+    "url": "https://www.marktechpost.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "708d0819-8c1c-485a-8973-3084a7bb3a8c",
+    "name": "Samuele Mazzanti on Medium",
+    "type": "rss",
+    "url": "https://medium.com/feed/@mazzanti.sam",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c52e6845-13b2-4a3a-a5b4-28f447f1d8af",
+    "name": "MLearning.ai on Medium",
+    "type": "rss",
+    "url": "https://medium.com/feed/mlearning-ai",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "10158f3a-c83d-413a-9823-0ddf4d25b8be",
+    "name": "Microsoft Research",
+    "type": "rss",
+    "url": "https://www.microsoft.com/en-us/research/feed/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cc6f364f-8704-40e5-9ed2-3542169ba1a7",
+    "name": "Max Woolf's Blog",
+    "type": "rss",
+    "url": "https://minimaxir.com/post/index.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "c575268a-9411-4002-a82b-4a368fb71b29",
+    "name": "MIT News - Machine learning",
+    "type": "rss",
+    "url": "https://news.mit.edu/topic/mitmachine-learning-rss.xml",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "7c0160b5-e289-4e62-baba-f7898624daeb",
+    "name": "Nanonets - AI & Machine Learning Blog",
+    "type": "rss",
+    "url": "https://nanonets.com/blog/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "6f89cef6-cb9e-4e35-9540-e3eaa39cf3a0",
+    "name": "Nature.com - Machine learning",
+    "type": "rss",
+    "url": "https://www.nature.com/subjects/machine-learning.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "834168d4-e012-412b-a7a4-23d5aa60a3bf",
+    "name": "neptune.ai Blog",
+    "type": "rss",
+    "url": "https://neptune.ai/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "ae272ed4-3910-4848-be67-382e1785b9f3",
+    "name": "New Scientist - Technology",
+    "type": "rss",
+    "url": "https://www.newscientist.com/subject/technology/feed/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "100626d4-dfb3-4d8b-ac6b-4b12ffc1c41d",
+    "name": "NVIDIA Technical Blog",
+    "type": "rss",
+    "url": "https://developer.nvidia.com/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "09471cda-a743-44bc-a63f-286b348ab689",
+    "name": "OpenAI",
+    "type": "rss",
+    "url": "https://openai.com/blog/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "031c409c-591f-4640-94e0-cfe42628c08b",
+    "name": "Packt Hub - Artificial Intelligence News",
+    "type": "rss",
+    "url": "https://hub.packtpub.com/category/data/artificial-intelligence/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3a7bd2df-bd52-4795-a3ad-589d3765976f",
+    "name": "Paperspace Blog",
+    "type": "rss",
+    "url": "https://blog.paperspace.com/rss/",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "33817235-3011-420b-846f-e47a18f6c798",
+    "name": "BMC Software - Machine Learning & Big Data Blog",
+    "type": "rss",
+    "url": "https://www.bmc.com/blogs/categories/machine-learning-big-data/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "fdd51912-ebcd-4420-a09e-a35e8933a4fc",
+    "name": "Product Hunt",
+    "type": "rss",
+    "url": "https://www.producthunt.com/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "1f53ec90-ba0b-4118-9482-93f77e5f5af5",
+    "name": "PyImageSearch",
+    "type": "rss",
+    "url": "https://pyimagesearch.com/blog/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "54ac3b64-aeab-469e-aab4-e2c0fdecf20e",
+    "name": "Newest Python PEPs",
+    "type": "rss",
+    "url": "https://www.python.org/dev/peps/peps.rss",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b1f0fa20-b1cb-420c-bbc0-e32cb0c99fbf",
+    "name": "Quanta Magazine",
+    "type": "rss",
+    "url": "https://api.quantamagazine.org/feed",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "90ba0151-75fc-45a5-9fff-ac4945977fcc",
+    "name": "R-bloggers",
+    "type": "rss",
+    "url": "https://feeds.feedburner.com/RBloggers",
+    "group": "AI-英文",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "8fe959f0-9e24-49f5-ac95-342ac84f5dc6",
+    "name": "分享创造日报",
+    "type": "rss",
+    "url": "https://v2ex-create.nexmm.com/rss.xml",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "bb5dbe3a-c145-4b80-a75c-f44aaa0bd74f",
+    "name": "分享创造日报 (Follow)",
+    "type": "rss",
+    "url": "https://app.follow.is/feed/59241875117740032",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "95de14c3-10a0-4769-8455-acd2bd65de2f",
+    "name": "三花 AI 快讯",
+    "type": "rss",
+    "url": "https://sanhua.himrr.com/daily-news/feed",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "b2291ff0-2034-4617-9fbc-9c14cfbedfa7",
+    "name": "Apptisan",
+    "type": "rss",
+    "url": "https://quail.ink/apptisan/feed/atom",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0b0ed8f9-524c-405a-b149-e22a5c2911d2",
+    "name": "龙爪槐守望者",
+    "type": "rss",
+    "url": "https://www.ftium4.com/rss.xml",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "3bcdc74e-3f21-483a-9258-48f6313bc271",
+    "name": "Decohack",
+    "type": "rss",
+    "url": "https://www.decohack.com/feed",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cdb6e357-f0cf-48d3-b6a9-17ba576f0632",
+    "name": "DEX 周刊",
+    "type": "rss",
+    "url": "https://quail.ink/dingyi/feed/atom",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "888ecee4-4f08-4ee6-a894-a9b445c585ab",
+    "name": "阮一峰的网络日志",
+    "type": "rss",
+    "url": "https://www.ruanyifeng.com/blog/atom.xml",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "a3980683-3c3c-4a13-8ec5-4a854aaba247",
+    "name": "让小产品的独立变现更简单",
+    "type": "rss",
+    "url": "https://www.ezindie.com/feed/rss.xml",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "23a1dc51-2835-4dde-a06e-70e114945c73",
+    "name": "潮流周刊",
+    "type": "rss",
+    "url": "https://weekly.tw93.fun/rss.xml",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "0b450586-2fde-4f41-9829-942fef3c400a",
+    "name": "产品安利社",
+    "type": "rss",
+    "url": "https://rsshub.app/jike/topic/564c2ce508987312006e2326",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "46254fb8-c5b5-4720-9419-1a2b07e1df46",
+    "name": "AI 探索站",
+    "type": "rss",
+    "url": "https://rsshub.app/jike/topic/63579abb6724cc583b9bba9a",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "cc7bed01-4086-4426-b5aa-cb5f2f7cd31b",
+    "name": "大产品小细节",
+    "type": "rss",
+    "url": "https://rsshub.app/jike/topic/57079a1526b0ab12002c29da",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  },
+  {
+    "id": "d31c6e2c-4061-4f2a-b622-7abeefd6a6b4",
+    "name": "奇趣网站收藏家",
+    "type": "rss",
+    "url": "https://rsshub.app/jike/topic/55d81b4b60b296e5679785de",
+    "group": "AI-开发动态",
+    "logo": "",
+    "enabled": true,
+    "last_crawl_time": null
+  }
+]
