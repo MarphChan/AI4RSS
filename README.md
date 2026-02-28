@@ -24,7 +24,7 @@ A zero-code AI news aggregation tool that helps you configure, fetch, summarize,
 1. **Clone the repository**:
    **克隆仓库**:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/MarphChan/AI4RSS.git
    cd ai-daily-news-assistant
    ```
 
