@@ -93,7 +93,5 @@ A zero-code AI news aggregation tool that helps you configure, fetch, summarize,
   - `sources.json`: 数据源列表（自动生成）。
 
 ## License
-## 许可证
-
 MIT License
-MIT 许可证
+
