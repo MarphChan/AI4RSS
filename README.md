@@ -39,6 +39,10 @@ A zero-code AI news aggregation tool that helps you configure, fetch, summarize,
    ```bash
    streamlit run app.py
    ```
+   **或通过这种方式运行应用**:
+   ```bash
+   python3 -m streamlit run app.py
+   ```
 
 ## Usage Guide
 ## 使用指南
