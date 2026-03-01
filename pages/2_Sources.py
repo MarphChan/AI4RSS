@@ -121,8 +121,10 @@ def main():
                                     st.session_state['batch_candidates'] = candidates
                                 else:
                                     st.warning(i18n.get_text("no_sources_found_warning"))
+                                    if 'batch_candidates' in st.session_state: del st.session_state['batch_candidates']
                             else:
                                 st.warning(i18n.get_text("no_sources_found_warning"))
+                                if 'batch_candidates' in st.session_state: del st.session_state['batch_candidates']
 
             # Display Candidates
             if 'batch_candidates' in st.session_state and st.session_state['batch_candidates']:
@@ -147,6 +149,8 @@ def main():
                     use_container_width=True,
                     key="batch_editor"
                 )
+
+                st.session_state["batch_candidates"] = edited_candidates.to_dict("records")
                 
                 if st.button(i18n.get_text("import_selected_button")):
                     count = 0

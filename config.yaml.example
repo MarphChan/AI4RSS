@@ -1,6 +1,8 @@
 image:
   enable_generation: false
   provider: wanx
+  default_images:
+    - static/images/ai_news.svg
 llm:
   api_key: "YOUR_API_KEY_HERE"
   base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
@@ -14,3 +16,8 @@ system:
   push_time: "09:30"
   time_period: 168
   timezone: Asia/Shanghai
+feishu:
+  receiver_enabled: false
+  receiver_host: "127.0.0.1"
+  receiver_port: 8765
+  receiver_token: ""

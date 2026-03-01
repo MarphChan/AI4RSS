@@ -11,3 +11,5 @@ python-frontmatter==1.1.0
 black==24.2.0
 flake8==7.0.0
 watchdog==4.0.0
+feedparser==6.0.12
+streamlit-sortables==0.1.3

@@ -27,13 +27,16 @@
 
 ## Phase 4: The Workspace & Daily Workflow
 - [ ] 4.1 **News Generation Logic:** Create a function `generate_daily_news()` that orchestrates fetching -> filtering -> summarization -> markdown generation.
-- [ ] 4.2 **Workspace UI:** Implement `pages/3_Workspace.py`.
-    - [ ] Display status of last run.
-    - [ ] "Start Generation" button triggers the logic.
-    - [ ] Split view editor: `st.text_area` (left) + `st.markdown` (right).
+- [ ] 4.2 **Workspace UI (Guided Steps):** Refactor `pages/3_Workspace.py` into a step-based flow.
+    - [ ] Step 1.1 数据源设置与管理：仅支持按 Type 筛选（默认 tech、记住上次选择），启用/禁用与触发生成。
+    - [ ] Step 1.2 阅读清单：生成条目 + 外部链接；checkbox 标记已读/未读；支持多选删除条目并持久化。
+    - [ ] Step 1.3 新闻预览与查看：版本选择、编辑与预览、主题筛选生成新版本。
+    - [ ] Step 1.4 发布通知设置和格式设置：Webhook 配置/测试、格式转换与推送。
 - [ ] 4.3 **Data Persistence:** Ensure generated markdown is saved to `data/YYYY-MM-DD-vX.0.md` with Front Matter (handle version incrementing).
 - [ ] 4.4 **Push Logic:** Implement `core/pusher.py` to send the final markdown content to WeCom Webhook.
 - [ ] 4.5 **Smart Format Adjustment:** Implement format selection and LLM parsing in `pages/3_Workspace.py`.
+- [ ] 4.6 **Reading List (Unread/Read):** Add a persistent reading list with drag-and-drop between Unread/Read in `pages/3_Workspace.py`.
+- [ ] 4.7 **Feishu URL Ingestion (Optional):** Add a lightweight local receiver to accept Feishu-forwarded URLs and append to Reading List.
 
 ## Phase 5: Automation & Polish
 - [ ] 5.1 **Scheduler Implementation:** Create `core/scheduler.py` running in a daemon thread.

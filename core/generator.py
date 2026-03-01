@@ -16,6 +16,9 @@ from core.config_manager import config_manager
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+def _builtin_default_image_path() -> str:
+    return os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "static", "images", "ai_news.svg"))
+
 class NewsGenerator:
     def __init__(self, data_dir: str = "history"):
         self.data_dir = data_dir
@@ -126,7 +129,7 @@ class NewsGenerator:
         image_url = item.get('picurl', '')
         
         # Priority 2: AI Generation (if no image found and enabled)
-        if not image_url and config_manager.config["image"].get("enable_generation", False):
+        if not image_url and config_manager.config.get("image", {}).get("enable_generation", False):
             prompt = summary_data.get("image_prompt", "")
             if prompt:
                  # Rate limit or cost consideration needed here in real app
@@ -141,10 +144,13 @@ class NewsGenerator:
         
         # Priority 4: Default Image (Fallback)
         if not image_url:
-             default_images = config_manager.config["image"].get("default_images", [])
+             default_images = config_manager.config.get("image", {}).get("default_images", [])
              if default_images:
-                 # Use idx to cycle through default images
                  image_url = default_images[idx % len(default_images)]
+             else:
+                 candidate = _builtin_default_image_path()
+                 if os.path.exists(candidate):
+                     image_url = candidate
 
         article_meta = {
             "id": f"art_{idx}",
@@ -243,7 +249,7 @@ class NewsGenerator:
             "date": today_str,
             "version": version_str,
             "status": "pending_review",
-            "push_time": config_manager.config["system"].get("push_time", "09:30"),
+            "push_time": config_manager.config.get("system", {}).get("push_time", "09:30"),
             "articles_meta": processed_articles
         }
         

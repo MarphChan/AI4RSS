@@ -39,13 +39,17 @@
   - Configuration: `use_container_width=True`, hide index.
 
 ### 3.4 The Workspace Editor
-- **Left Column:** `st.text_area`
-  - Label: "Edit Markdown Content"
-  - Height: `600px` minimum.
-  - Value: Loaded from `data/YYYY-MM-DD-vX.0.md` (content body).
-- **Right Column:** `st.markdown`
-  - Content: Rendered markdown from the left column.
-  - Images: Should render correctly if URLs are valid.
+- Workspace 使用 4 步子页面组织内容，顶部提供步骤切换（segmented control / tabs）与 Next/Back。
+- Step 1.1 数据源管理仅做“类型筛选 + 启用/禁用 + 生成触发”，不在此处提供新增/删除；类型默认 tech 且记住上次选择。
+- Step 1.3 内提供编辑器双列布局：
+  - **Left Column:** `st.text_area`（编辑 Markdown body）
+  - **Right Column:** `st.markdown`（实时预览）
+
+### 3.5 Reading List (Unread/Read)
+- Step 1.2 提供“阅读清单”区块，来源包括生成条目与外部链接。
+- 每条阅读项前使用 checkbox 标记已读；勾选后移动到已读列表。
+- 保留拖拽能力用于排序（可选），但“已读/未读”判断以 checkbox 为准。
+- 提供多选删除能力：用户勾选“待删除”后点击删除按钮批量移除条目。
 
 ## 4. Typography & Styling (Markdown)
 - **Headers:**

@@ -2,6 +2,10 @@ import yaml
 import os
 from typing import Dict, Any
 
+DEFAULT_AI_NEWS_IMAGE = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "static", "images", "ai_news.svg")
+)
+
 class ConfigManager:
     DEFAULT_CONFIG = {
         "system": {
@@ -19,10 +23,16 @@ class ConfigManager:
         "image": {
             "enable_generation": True,
             "provider": "wanx",
-            "default_images": []
+            "default_images": [DEFAULT_AI_NEWS_IMAGE]
         },
         "notification": {
             "webhook_url": ""
+        },
+        "feishu": {
+            "receiver_enabled": False,
+            "receiver_host": "127.0.0.1",
+            "receiver_port": 8765,
+            "receiver_token": ""
         }
     }
 
@@ -53,6 +63,8 @@ class ConfigManager:
         for key, value in config.items():
             if key in result and isinstance(result[key], dict) and isinstance(value, dict):
                 result[key] = self._merge_defaults(value, result[key])
+            elif key in result and isinstance(result[key], list) and isinstance(value, list) and not value and result[key]:
+                continue
             else:
                 result[key] = value
         return result

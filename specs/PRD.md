@@ -101,39 +101,26 @@
 - **Test Fetch:** Immediate trigger for a single source to validate selector/RSS.
 - **测试获取：** 立即触发单个来源以验证选择器/RSS。
 
-### 4.3 Workspace (Page 3 - Core)
-### 4.3 工作区 (页面 3 - 核心)
-- **Source Selection:** 
-- **来源选择：**
-  - Filter sources by Group (e.g., "Tech", "Finance", or "All").
-  - 按分组筛选来源（例如，“科技”、“金融”或“全部”）。
-  - View list of sources in the selected groups.
-  - 查看选定分组中的来源列表。
-- **Manual Trigger:** "Start Generation" button.
-- **手动触发：** “开始生成”按钮。
-- **Editor:** Two-column layout. Left: Markdown editor. Right: Live preview.
-- **编辑器：** 双列布局。左侧：Markdown 编辑器。右侧：实时预览。
-- **Regenerate Image:** AI re-drawing for specific news items.
-- **重新生成图像：** AI 为特定新闻条目重新绘图。
-- **Smart Format Adjustment:** 
-- **智能格式调整：**
-  - Select push format: "Markdown" or "News (Graph-Text)".
-  - 选择推送格式：“Markdown”或“新闻（图文）”。
-  - Button: "Smart Parse Format".
-  - 按钮：“智能解析格式”。
-  - Preview: Preview the parsed content before pushing.
-  - 预览：推送前预览解析后的内容。
-- **Topic Filter:**
-  - Input: Topic of interest (e.g., Tech, Finance).
-  - 输入：感兴趣的主题（例如：科技、金融）。
-  - Input: Max Items (e.g., 5).
-  - 输入：最大条数（例如：5）。
-  - Button: "Generate Filtered Version".
-  - 按钮：“生成筛选版本”。
-  - Action: Generate a new version (e.g., v1.1) containing only relevant articles (top N).
-  - 操作：生成一个仅包含相关文章（Top N）的新版本（例如 v1.1）。
-- **Push:** "Confirm & Push" button to send final content to Webhook.
-- **推送：** “确认并推送”按钮，将最终内容发送到 Webhook。
+### 4.3 Workspace (Page 3 - Guided Steps)
+### 4.3 工作区 (页面 3 - 分步引导)
+Workspace 重构为 4 个“子页面/步骤”，步骤间有依赖关系：下一步仅使用并复用上一步的选择与结果，形成更明确的「配置 → 阅读 → 预览 → 发布」链路。
+
+- **Step 1.1 数据源设置与管理**
+  - 仅支持“数据源类型（Type）”筛选（不支持在此处新增/删除数据源；数据源维护仍在 Sources 页面）。
+  - 默认选择类型为【tech】，并缓存上次选择的类型（本地持久化）。
+  - 快速查看/启用/禁用数据源，在当前类型范围内触发生成（Start Generation）。
+- **Step 1.2 阅读清单**
+  - 阅读清单由两部分组成：数据源生成的条目 + 用户手动/外部转发的链接。
+  - 每条阅读项前提供 checkbox，用于标记是否已阅读（勾选即进入已读）。
+  - 支持多选删除阅读清单条目（对未读/已读均生效），删除后从本地持久化中移除。
+- **Step 1.3 新闻预览与查看**
+  - 版本选择（vX.0）与状态展示。
+  - Markdown 内容编辑 + 预览。
+  - 主题筛选生成新版本（Top N）。
+- **Step 1.4 发布通知设置和格式设置**
+  - 配置并测试 Webhook。
+  - 选择推送格式：Markdown / 图文 news / markdown_v2。
+  - 智能格式解析、预览解析结果、确认推送。
 
 ### 4.4 Background Logic
 ### 4.4 后台逻辑
@@ -143,6 +130,8 @@
 - **获取器：** 并发执行数据获取。
 - **Filter:** Filter articles based on configured time period (default 24h).
 - **过滤器：** 根据配置的时间段（默认 24 小时）过滤文章。
+- **Feishu URL Ingestion (Optional):** Receive Feishu-forwarded reading URLs and add them to Reading List as Unread.
+- **飞书链接接入（可选）：** 接收从飞书转发过来的阅读链接，并写入阅读清单的【未读】。
 
 ## 5. Data Structures
 ## 5. 数据结构
@@ -168,6 +157,12 @@ image:
 
 notification:
   webhook_url: "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=..."
+
+feishu:
+  receiver_enabled: false
+  receiver_host: "127.0.0.1"
+  receiver_port: 8765
+  receiver_token: ""
 ```
 
 ### 5.2 Data Sources (`sources.json`)
@@ -222,6 +217,11 @@ articles_meta:
 > **Summary**: Context window expanded to 128k, knowledge base updated to April 2023, development costs reduced by 3x.
 > *Source: https://openai.com/blog/gpt-4-turbo*
 ```
+
+### 5.4 Reading List (`history/reading_list.json`)
+### 5.4 阅读清单 (`history/reading_list.json`)
+Reading list is stored locally as a JSON file to persist Unread/Read state across days and support external URLs not present in the generated daily file.
+阅读清单以本地 JSON 文件方式存储，用于跨天保留未读/已读状态，并支持不在当天生成结果中的外部阅读链接。
 
 ## 6. Prompt Engineering Strategy
 ## 6. 提示工程策略

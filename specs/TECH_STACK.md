@@ -8,6 +8,8 @@
 - **Streamlit:** `1.32.0`
   - *Rationale:* Zero HTML/CSS/JS, rapid prototyping, built-in session state management, easy data visualization.
   - *Key Components:* `st.sidebar`, `st.columns`, `st.expander`, `st.form`, `st.code`.
+- **streamlit-sortables:** (Community component)
+  - *Usage:* Drag-and-drop sorting and moving items between Unread/Read containers in Workspace.
 
 ## 3. Backend Logic & API
 - **OpenAI (Python SDK):** `1.13.3`
