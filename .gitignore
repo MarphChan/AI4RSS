@@ -28,3 +28,6 @@ config.yaml
 # History folder (keep folder but ignore contents)
 history/*
 !history/.gitkeep
+
+# Specs
+specs/todo-list.md

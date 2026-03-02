@@ -10,9 +10,6 @@ class FormatMixin:
         Convert markdown content to a specific JSON payload format for WeCom.
         format_type: 'news' or 'markdown'
         """
-        if not self.client:
-            return {}
-
         if format_type == "news":
             system_prompt = """
 你是一个企业微信消息格式转换助手。
@@ -65,15 +62,9 @@ class FormatMixin:
 [内容结束]
 """
         try:
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"}
-            )
-            result = response.choices[0].message.content
+            result = self.generate_response(system_prompt, user_prompt, json_mode=True)
+            if not result:
+                return {}
             return json.loads(result)
         except Exception as e:
             logger.error(f"LLM Format Conversion Error: {e}")

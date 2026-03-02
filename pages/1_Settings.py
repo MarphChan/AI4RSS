@@ -8,11 +8,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.config_manager import config_manager
 from core import i18n
+from core.ui_nav import render_sidebar_navigation
 
 st.set_page_config(page_title="Settings", page_icon="⚙️", layout="wide")
 
 def main():
     i18n.init_language()
+    render_sidebar_navigation(active="settings")
     
     # Language Selector (Top Right)
     col_title, col_lang = st.columns([8, 2])
@@ -155,6 +157,40 @@ def main():
 
         st.divider()
 
+        st.subheader("飞书转发链接接入")
+        feishu_cfg = current_config.get("feishu", {})
+
+        feishu_enabled = st.checkbox(
+            "启用本地接收服务",
+            value=bool(feishu_cfg.get("receiver_enabled", False)),
+            help="开启后会在本机启动一个 HTTP 服务，用于接收飞书转发的链接并写入未读清单。"
+        )
+
+        c_f1, c_f2, c_f3 = st.columns([2, 1, 2])
+        with c_f1:
+            feishu_host = st.text_input(
+                "监听地址",
+                value=str(feishu_cfg.get("receiver_host", "127.0.0.1")),
+                help="一般保持 127.0.0.1；若需局域网访问可改为 0.0.0.0"
+            )
+        with c_f2:
+            feishu_port = st.number_input(
+                "端口",
+                min_value=1,
+                max_value=65535,
+                value=int(feishu_cfg.get("receiver_port", 8765)),
+                step=1
+            )
+        with c_f3:
+            feishu_token = st.text_input(
+                "Token（可选）",
+                value=str(feishu_cfg.get("receiver_token", "")),
+                type="password",
+                help="若设置 Token，请在回调 URL 上携带 ?token=... 用于简单校验"
+            )
+
+        st.divider()
+
         submitted = st.form_submit_button(i18n.get_text("save_config_button"))
         
         if submitted:
@@ -191,6 +227,12 @@ def main():
                 new_config["system"]["time_period"] = rev_options[selected_option]
             
             # Save to disk
+            new_config.setdefault("feishu", {})
+            new_config["feishu"]["receiver_enabled"] = bool(feishu_enabled)
+            new_config["feishu"]["receiver_host"] = feishu_host
+            new_config["feishu"]["receiver_port"] = int(feishu_port)
+            new_config["feishu"]["receiver_token"] = feishu_token
+
             config_manager.save(new_config)
             st.success(i18n.get_text("config_saved_success"))
             

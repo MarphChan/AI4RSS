@@ -11,13 +11,15 @@ class Pusher:
     def __init__(self):
         pass
 
-    def push(self, content: Union[str, Dict]) -> bool:
+    def push(self, content: Union[str, Dict], webhook_url: str = None) -> bool:
         """
         Push content to Enterprise WeChat Webhook.
         If content is a string, it sends as markdown.
         If content is a dict, it sends as raw JSON payload.
+        If webhook_url is not provided, uses global default from config.
         """
-        webhook_url = config_manager.config["notification"].get("webhook_url", "")
+        if not webhook_url:
+            webhook_url = config_manager.config["notification"].get("webhook_url", "")
         
         if not webhook_url:
             logger.warning("Webhook URL not configured.")

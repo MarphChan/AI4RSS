@@ -80,6 +80,22 @@ class SourceManager:
                 return source
         return None
 
+    def update_sources_bulk(self, updates_by_id: Dict[str, Dict]) -> int:
+        """Update multiple sources and persist once. Returns count of updated items."""
+        if not updates_by_id:
+            return 0
+
+        updated_count = 0
+        for source in self._sources:
+            source_id = source.get("id")
+            if source_id in updates_by_id:
+                source.update(updates_by_id[source_id])
+                updated_count += 1
+
+        if updated_count > 0:
+            self._save_sources(self._sources)
+        return updated_count
+
     def delete_source(self, source_id: str) -> bool:
         """Delete a source."""
         original_len = len(self._sources)

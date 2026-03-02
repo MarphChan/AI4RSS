@@ -9,9 +9,6 @@ class ContentMixin:
         """
         Summarize article content into title, summary (30 words), and image prompt.
         """
-        if not self.client:
-            return {"title": "Error", "summary": "API Key missing.", "image_prompt": ""}
-
         system_prompt = """
 你是一个专业的 AI 科技新闻编辑。你的任务是阅读给定的新闻内容，并将其总结为中文。
 
@@ -36,15 +33,10 @@ JSON 结构：
 请提取并返回 JSON 数据。
 """
         try:
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"} # Ensure JSON output
-            )
-            result = response.choices[0].message.content
+            # Use unified generate_response with JSON mode
+            result = self.generate_response(system_prompt, user_prompt, json_mode=True)
+            if not result:
+                raise Exception("Empty response from LLM")
             return json.loads(result)
         except Exception as e:
             logger.error(f"LLM Summarization Error: {e}")

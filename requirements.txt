@@ -1,5 +1,6 @@
 streamlit==1.32.0
 openai==1.13.3
+anthropic==0.18.0
 httpx<0.28.0
 requests==2.31.0
 beautifulsoup4==4.12.3
@@ -11,3 +12,5 @@ python-frontmatter==1.1.0
 black==24.2.0
 flake8==7.0.0
 watchdog==4.0.0
+feedparser==6.0.12
+streamlit-sortables==0.1.3

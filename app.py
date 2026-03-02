@@ -1,7 +1,10 @@
 import streamlit as st
 import os
 from core.scheduler import scheduler_service
+from core.config_manager import config_manager
+from core.feishu_receiver import FeishuReceiverService
 from core import i18n
+from core.ui_nav import render_sidebar_navigation
 
 # Set page configuration first!
 st.set_page_config(
@@ -19,6 +22,21 @@ def start_scheduler():
     return True
 
 start_scheduler()
+
+@st.cache_resource
+def start_feishu_receiver():
+    feishu_cfg = (config_manager.config or {}).get("feishu", {}) or {}
+    if not feishu_cfg.get("receiver_enabled", False):
+        return None
+    service = FeishuReceiverService(
+        host=str(feishu_cfg.get("receiver_host", "127.0.0.1")),
+        port=int(feishu_cfg.get("receiver_port", 8765)),
+        token=str(feishu_cfg.get("receiver_token", "")),
+    )
+    service.start()
+    return service
+
+start_feishu_receiver()
 
 def main():
     i18n.init_language()
@@ -39,9 +57,7 @@ def main():
     
     st.markdown(i18n.get_text("welcome_message"))
 
-    # Sidebar Status
-    st.sidebar.title(i18n.get_text("navigation"))
-    st.sidebar.success(i18n.get_text("system_ready"))
+    render_sidebar_navigation(active="home")
     
     # Check if config exists
     if not os.path.exists("config.yaml"):

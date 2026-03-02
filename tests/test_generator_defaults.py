@@ -56,6 +56,38 @@ class TestGeneratorDefaults(unittest.TestCase):
         self.assertEqual(articles[3]['image_url'], "http://img2.com")
         self.assertEqual(articles[4]['image_url'], "http://img1.com")
 
+    @patch('core.generator.source_manager')
+    @patch('core.generator.fetcher')
+    @patch('core.generator.llm_engine')
+    @patch('core.generator.config_manager')
+    @patch('core.generator.deduplicator')
+    def test_builtin_default_image_used_when_config_empty(self, mock_deduplicator, mock_config, mock_llm, mock_fetcher, mock_source_manager):
+        mock_source_manager.get_enabled_sources.return_value = [{'id': '1', 'url': 'http://test.com'}]
+        mock_source_manager.get_source.return_value = {'id': '1', 'url': 'http://test.com'}
+
+        mock_items = [
+            {'title': 'News', 'content': 'Content', 'url': 'http://test.com/1', 'picurl': '', 'source_id': '1'}
+        ]
+        mock_fetcher.fetch_all.return_value = mock_items
+        mock_deduplicator.filter_duplicates.side_effect = lambda x: x
+        mock_llm.summarize.return_value = {"title": "Summary", "summary": "Summary", "image_prompt": "Prompt"}
+
+        mock_config.config = {
+            "image": {
+                "enable_generation": False,
+                "default_images": []
+            },
+            "system": {"push_time": "09:30"}
+        }
+
+        content = self.generator.generate_daily_news(max_items=1)
+
+        import frontmatter
+        post = frontmatter.loads(content)
+        articles = post.metadata['articles_meta']
+        self.assertEqual(len(articles), 1)
+        self.assertTrue(articles[0]['image_url'].endswith(os.path.join("static", "images", "ai_news.svg")))
+
     def tearDown(self):
         import shutil
         if os.path.exists("tests/temp_history"):

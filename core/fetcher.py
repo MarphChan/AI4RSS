@@ -16,7 +16,12 @@ logger = logging.getLogger(__name__)
 class Fetcher:
     def __init__(self):
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+            'Connection': 'keep-alive',
         }
 
     def fetch_all(self, sources: List[Dict]) -> List[Dict]:
@@ -95,15 +100,52 @@ class Fetcher:
 
     def _fetch_web(self, url: str, source_name: str, source_id: str) -> List[Dict]:
         """
-        Simple web fetcher. 
+        Simple web fetcher with specialized parser support (e.g. for WeChat). 
         """
         try:
+            # Check for specialized parser (Jina Reader)
+            parser_config = config_manager.config.get("parser", {}).get("jina_reader", {})
+            use_jina = parser_config.get("enabled", False)
+            
+            # WeChat articles are notorious for anti-scraping, use Jina if enabled
+            if use_jina and "mp.weixin.qq.com" in url:
+                jina_url = f"{parser_config.get('base_url', 'https://r.jina.ai/')}{url}"
+                logger.info(f"Using Jina Reader for WeChat article: {url}")
+                try:
+                    resp = requests.get(jina_url, headers=self.headers, timeout=20)
+                    # Check for Jina's error message even if status is 200
+                    if resp.status_code == 200 and "No content fetched from provided URLs" not in resp.text:
+                        return [{
+                            "type": "markdown",
+                            "content": resp.text, # Jina returns clean markdown
+                            "url": url,
+                            "source_name": source_name,
+                            "source_id": source_id,
+                            "picurl": self._extract_image_from_html(resp.text, url), # Heuristic
+                            "pub_date": datetime.now().isoformat()
+                        }]
+                    else:
+                        logger.warning(f"Jina Reader failed or returned error message for {url}, falling back to standard fetch.")
+                except Exception as e:
+                    logger.warning(f"Jina Reader request failed for {url}: {e}, falling back to standard fetch.")
+            
+            # Fallback to standard requests
             resp = requests.get(url, headers=self.headers, timeout=10)
             if resp.status_code == 200:
-                picurl = self._extract_image_from_html(resp.text, url)
+                html_content = resp.text
+                
+                # Specialized parsing for WeChat if needed
+                if "mp.weixin.qq.com" in url:
+                    soup = BeautifulSoup(html_content, 'lxml')
+                    # WeChat content is usually in #js_content
+                    js_content = soup.find('div', id='js_content')
+                    if js_content:
+                        html_content = str(js_content)
+                
+                picurl = self._extract_image_from_html(html_content, url)
                 return [{
                     "type": "raw_html",
-                    "content": self._clean_html(resp.text), 
+                    "content": self._clean_html(html_content), 
                     "url": url,
                     "source_name": source_name,
                     "source_id": source_id,
@@ -164,10 +206,9 @@ class Fetcher:
                 return twitter_image['content']
 
             # 3. First img tag in main content (heuristic)
-            # Try to find images in common article containers first if possible, 
-            # but for now just find the first substantial image
             for img in soup.find_all('img'):
-                src = img.get('src')
+                # Handle standard src and WeChat's data-src
+                src = img.get('src') or img.get('data-src')
                 if src:
                     # skip small icons/tracking pixels? (hard without size info)
                     if 'icon' in src or 'logo' in src:
