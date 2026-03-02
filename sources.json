@@ -6,7 +6,8 @@
     "url": "https://plink.anyfeeder.com/jiemian/finance",
     "enabled": true,
     "last_crawl_time": null,
-    "group": "All"
+    "group": "All",
+    "logo": NaN
   },
   {
     "id": "d67eee55-e556-45f2-be33-f171446cfff2",
@@ -15,7 +16,8 @@
     "url": "https://plink.anyfeeder.com/idaily/today",
     "group": "All",
     "enabled": false,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "953c0555-2705-4f3d-a771-79654288a3fc",
@@ -24,7 +26,8 @@
     "url": "https://plink.anyfeeder.com/netease/today",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "d356e1e7-ded3-44fd-9dea-83ac8b60c3ca",
@@ -33,7 +36,8 @@
     "url": "https://plink.anyfeeder.com/zaobao/realtime/china",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "fcd30091-c754-4444-91ec-ea64c10c219e",
@@ -42,7 +46,8 @@
     "url": "https://plink.anyfeeder.com/zaobao/realtime/world",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "4a793af5-352d-4562-a84d-4722fbe007fe",
@@ -51,7 +56,8 @@
     "url": "https://plink.anyfeeder.com/infzm/news",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "45359d17-7b0a-41e7-87ad-16cb011dfb7f",
@@ -60,7 +66,8 @@
     "url": "https://plink.anyfeeder.com/infzm/recommends",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "e998ef44-4f46-4371-9c4a-c5d86c94ae77",
@@ -69,7 +76,8 @@
     "url": "https://plink.anyfeeder.com/thepaper",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "9ab099fd-2e9d-4058-badf-bbc26b2365ca",
@@ -78,7 +86,8 @@
     "url": "https://plink.anyfeeder.com/chinadaily/dual",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "43b74196-c6b4-4fba-b06e-939866fd0c17",
@@ -87,7 +96,8 @@
     "url": "https://plink.anyfeeder.com/chinadaily/caijing",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "43bc8796-1f3f-4fa1-a227-a3d450a6a962",
@@ -96,7 +106,8 @@
     "url": "https://plink.anyfeeder.com/jiemian/news",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "d5074736-ff05-4fee-b0cb-82faba7e3c61",
@@ -105,7 +116,8 @@
     "url": "https://plink.anyfeeder.com/dgtle",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "cff7f78b-1a3f-40bc-a6aa-7ed6079c0ebc",
@@ -114,7 +126,8 @@
     "url": "https://plink.anyfeeder.com/36kr",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "4fee9ac7-914b-4cf4-aca0-1c7aab35b70f",
@@ -123,16 +136,18 @@
     "url": "https://plink.anyfeeder.com/cnbeta",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "9f0bb423-12b2-4dc6-b958-8f0acfc184a2",
     "name": "IT 之家",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/ithome/it",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "ac55823b-b915-48da-9c6e-658d6cbd1974",
@@ -141,7 +156,8 @@
     "url": "https://plink.anyfeeder.com/mittrchina/hot",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "51049aa1-dfbf-4dc4-b4ae-a40ad930dded",
@@ -150,7 +166,8 @@
     "url": "https://plink.anyfeeder.com/readhub/topic",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "d4cf8419-c155-49e9-8f8c-0b0e779e850e",
@@ -159,7 +176,8 @@
     "url": "https://plink.anyfeeder.com/readhub/daily",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "c17624aa-e4bf-4c76-90bc-cadd891396fa",
@@ -168,7 +186,8 @@
     "url": "https://plink.anyfeeder.com/readhub/blockchain",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "9036bbce-7b9d-4626-83b3-1adda4f0cad4",
@@ -177,7 +196,8 @@
     "url": "https://plink.anyfeeder.com/ifanr",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "f5f50ce5-0cfa-4bec-b6a4-6e1a04b37ffc",
@@ -186,16 +206,18 @@
     "url": "https://plink.anyfeeder.com/guokr/scientific",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "b36d3fc6-a2c3-4610-8442-fe7f80981c7f",
     "name": "虎嗅",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/huxiu",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "f9cad624-04aa-4df9-bac8-702fc0dc67a1",
@@ -204,7 +226,8 @@
     "url": "https://plink.anyfeeder.com/gcores",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "5865b880-8de5-4c15-b8c3-6c0fe9d7158f",
@@ -213,16 +236,18 @@
     "url": "https://plink.anyfeeder.com/mydrivers",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "d4db178a-22bc-4663-8f01-aa45a8be8c70",
     "name": "雷峰网",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/leiphone",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "04023929-54dc-4e54-92f4-cfc40e115b1a",
@@ -231,7 +256,8 @@
     "url": "https://plink.anyfeeder.com/ruancan",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "dbd44526-b225-4abd-88d3-7a71ac90ac76",
@@ -240,7 +266,8 @@
     "url": "https://plink.anyfeeder.com/sspai",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "183508b5-3390-4492-924b-d2109c39a141",
@@ -249,7 +276,8 @@
     "url": "https://plink.anyfeeder.com/ssapi/matrix",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "f15f5fa8-4bdf-4bb8-8860-f1d00cd4e5f0",
@@ -258,7 +286,8 @@
     "url": "https://plink.anyfeeder.com/sina/csj",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "dcbecc25-bea7-46ec-8837-300395b39858",
@@ -267,7 +296,8 @@
     "url": "https://plink.anyfeeder.com/geekpark",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "1f852278-0ae6-4cbb-a4d2-be3f7aa7550c",
@@ -276,7 +306,8 @@
     "url": "https://plink.anyfeeder.com/appinn",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "212f8363-ed72-4c4b-a641-f3dcace16740",
@@ -285,7 +316,8 @@
     "url": "https://plink.anyfeeder.com/expreview",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "0f488db5-d550-4fbb-9820-a9063341c21e",
@@ -294,16 +326,18 @@
     "url": "https://plink.anyfeeder.com/tmtpost",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "c59639e2-786a-49f8-a126-91640d9d0b00",
     "name": "猎云网",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/lieyunwang",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "978c5a15-61c2-44b9-8295-3348b8e9f9c1",
@@ -312,7 +346,8 @@
     "url": "https://plink.anyfeeder.com/pingwest",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "2ada272c-0c01-46be-83be-a28c605f6a5e",
@@ -321,7 +356,8 @@
     "url": "https://wanqu.co/feed/",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "444a3bc7-b070-492e-9f10-b4897e09b9d0",
@@ -330,16 +366,18 @@
     "url": "https://www.jeffjade.com/atom.xml",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "29ad70ec-1d6b-499a-8059-968d0ee50c98",
     "name": "阮一峰的网络日志",
     "type": "rss",
     "url": "https://www.ruanyifeng.com/blog/atom.xml",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "cc203e39-b0c7-4af8-9d17-79ad70608d4b",
@@ -348,7 +386,8 @@
     "url": "https://plink.anyfeeder.com/zhihu/daily",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "aad4c687-8e8f-4f43-91c5-760392fc9b23",
@@ -357,7 +396,8 @@
     "url": "http://www.zhihu.com/rss",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "ec8a87b9-5ef6-4598-b431-0210bde80caf",
@@ -366,7 +406,8 @@
     "url": "https://plink.anyfeeder.com/jianshu/home",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "ace69e6c-9423-4bd7-810e-3a838bc25143",
@@ -375,7 +416,8 @@
     "url": "https://plink.anyfeeder.com/jianshu/trending/weekly",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "6cc6b66d-e332-4c24-b4e7-6187d6c985c6",
@@ -384,7 +426,8 @@
     "url": "https://plink.anyfeeder.com/zhihu/hotlist",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "2a0558c5-9e84-4032-849f-238954158099",
@@ -393,7 +436,8 @@
     "url": "https://plink.anyfeeder.com/woshipm/popular",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "a5dc4394-bf65-4b02-9cde-f5b84d480125",
@@ -402,7 +446,8 @@
     "url": "https://zh.wikipedia.org/w/api.php?action=featuredfeed&feed=good&feedformat=atom",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "69971332-73f6-4549-8a20-8cf3d7bc72d6",
@@ -411,7 +456,8 @@
     "url": "https://plink.anyfeeder.com/bbc/learningenglish",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "2f10f985-f4fb-4d45-995b-6c2bff177935",
@@ -420,7 +466,8 @@
     "url": "https://plink.anyfeeder.com/meiriyiwen",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "b21c3827-4b64-46a3-8333-040643019d01",
@@ -429,7 +476,8 @@
     "url": "https://plink.anyfeeder.com/douban/review/movie",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "f96e91c0-a928-44a3-961e-cf289f160c8b",
@@ -438,7 +486,8 @@
     "url": "https://plink.anyfeeder.com/douban/review/book",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "2eb1a2ef-6fb0-45d1-af97-f2a59584e02b",
@@ -447,7 +496,8 @@
     "url": "https://plink.anyfeeder.com/xueqiu/today",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "b0a708e4-de43-4d45-99e1-5d85dc2669f6",
@@ -456,7 +506,8 @@
     "url": "https://plink.anyfeeder.com/xueqiu/hot",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "b7f9cb1f-6cae-4319-a351-d55f51c1147f",
@@ -465,7 +516,8 @@
     "url": "https://plink.anyfeeder.com/fortunechina",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "a341906a-587a-48b5-8862-39ecfff2a9db",
@@ -474,7 +526,8 @@
     "url": "https://plink.anyfeeder.com/fortunechina/shangye",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "f06cbe5d-f33f-4690-a371-5e5f313a3d91",
@@ -483,16 +536,18 @@
     "url": "https://plink.anyfeeder.com/fortunechina/lindgaoli",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "a8fd1bb2-f9ed-4f21-8134-49d9302f07ba",
     "name": "财富中文网 / 科技",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/fortunechina/keji",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "42ad3b98-1a61-47a9-bd18-8a4aa486e7ac",
@@ -501,7 +556,8 @@
     "url": "https://plink.anyfeeder.com/fortunechina/report",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "70521aba-01da-4fe3-adcc-36d7093d5002",
@@ -510,7 +566,8 @@
     "url": "https://plink.anyfeeder.com/jingjiribao",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "528ab6e7-51fc-4ca5-8e6c-0b57b24c5c68",
@@ -519,7 +576,8 @@
     "url": "https://plink.anyfeeder.com/dapenti/caijing",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "614ef859-61c3-4ddd-acbe-f2e924f3ee0a",
@@ -528,7 +586,8 @@
     "url": "https://plink.anyfeeder.com/eeo",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "bf2a75d4-5a98-4179-8c47-dd6125939c96",
@@ -537,7 +596,8 @@
     "url": "https://plink.anyfeeder.com/jiemian/business",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "5660f366-9c9a-4e95-80eb-fa3c5d2add42",
@@ -546,7 +606,8 @@
     "url": "https://plink.anyfeeder.com/jiemian/finance",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "99f3e478-d730-40ac-ba85-b0c9a41f41eb",
@@ -555,7 +616,8 @@
     "url": "https://plink.anyfeeder.com/weibo/search/hot",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "caf74afb-3150-4cb7-b80e-dff025723f7e",
@@ -564,7 +626,8 @@
     "url": "https://plink.anyfeeder.com/jiandan",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "5e8b07f9-b74c-455c-a78c-4e00a5ba9dbc",
@@ -573,7 +636,8 @@
     "url": "https://plink.anyfeeder.com/toodaylab",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "55208d29-e5f0-4bdf-b314-216b0c4f4b80",
@@ -582,7 +646,8 @@
     "url": "https://plink.anyfeeder.com/infoq/recommend",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "471d48f2-3fd2-4129-bde0-cea1aa09f8b7",
@@ -591,16 +656,18 @@
     "url": "https://plink.anyfeeder.com/readhub/technews",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "c49c60fd-92ec-4619-9011-2e45438eebae",
     "name": "Linux 中国",
     "type": "rss",
     "url": "https://plink.anyfeeder.com/linux.cn",
-    "group": "All",
+    "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "5225a165-da05-47e8-938e-fbe56d66062a",
@@ -609,7 +676,8 @@
     "url": "https://plink.anyfeeder.com/toutiao.io",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "ca953114-247d-4822-9356-9b42965c5418",
@@ -618,7 +686,8 @@
     "url": "https://plink.anyfeeder.com/freebuf",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "160803de-a200-4868-a12e-698045492dcb",
@@ -627,7 +696,8 @@
     "url": "https://plink.anyfeeder.com/aljazeera/news",
     "group": "All",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "7556a2d1-15ae-4d14-993c-38dc7733fb42",
@@ -636,7 +706,8 @@
     "url": "https://plink.anyfeeder.com/sbs/chinese",
     "group": "",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "6c601c16-fbc0-4562-98da-8cbab9d2dc89",
@@ -645,7 +716,8 @@
     "url": "https://www.ifanr.com/feed",
     "group": "tech",
     "enabled": true,
-    "last_crawl_time": null
+    "last_crawl_time": null,
+    "logo": NaN
   },
   {
     "id": "3a3a97eb-540f-4f2b-8690-5a808f5351fc",

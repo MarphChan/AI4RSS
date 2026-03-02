@@ -9,9 +9,6 @@ class DiscoveryMixin:
         """
         Extract news links from raw HTML.
         """
-        if not self.client:
-            return []
-
         system_prompt = """
 你是一个爬虫辅助助手。你的任务是从杂乱的 HTML 文本中提取出过去 24 小时内发布的文章链接。
 
@@ -33,15 +30,9 @@ class DiscoveryMixin:
 [HTML结束]
 """
         try:
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"}
-            )
-            result = response.choices[0].message.content
+            result = self.generate_response(system_prompt, user_prompt, json_mode=True)
+            if not result:
+                return []
             # Handle potential wrapper keys if LLM wraps list in object
             data = json.loads(result)
             if isinstance(data, list):
@@ -61,9 +52,6 @@ class DiscoveryMixin:
         Extract RSS/Web sources from unstructured text.
         Returns a list of dicts: [{"name": "...", "url": "...", "type": "rss"}]
         """
-        if not self.client:
-            return []
-
         system_prompt = """
         你是一个辅助用户整理 RSS 订阅源的助手。
         用户的输入可能是一段包含多个 RSS 地址的文本，或者是通过 Markdown/HTML 格式列出的博客列表。
@@ -87,15 +75,9 @@ class DiscoveryMixin:
         [文本结束]
         """
         try:
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"}
-            )
-            result = response.choices[0].message.content
+            result = self.generate_response(system_prompt, user_prompt, json_mode=True)
+            if not result:
+                return []
             data = json.loads(result)
             
             # Handle wrapper
@@ -114,9 +96,6 @@ class DiscoveryMixin:
         """
         Find RSS sources for a given topic.
         """
-        if not self.client:
-            return []
-
         system_prompt = """
         你是一个专业的 RSS 源推荐助手。用户会提供一个感兴趣的主题（如“人工智能”、“金融”等），你的任务是推荐相关的、高质量的 RSS 订阅源。
 
@@ -134,15 +113,9 @@ class DiscoveryMixin:
         user_prompt = f"请推荐关于“{topic}”的 RSS 订阅源。"
         
         try:
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                response_format={"type": "json_object"}
-            )
-            result = response.choices[0].message.content
+            result = self.generate_response(system_prompt, user_prompt, json_mode=True)
+            if not result:
+                return []
             data = json.loads(result)
             
             if isinstance(data, list):

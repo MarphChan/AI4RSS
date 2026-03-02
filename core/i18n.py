@@ -32,6 +32,22 @@ TRANSLATIONS = {
         "en": "Navigation",
         "zh": "导航"
     },
+    "nav_home": {
+        "en": "Home",
+        "zh": "首页"
+    },
+    "nav_settings": {
+        "en": "Settings",
+        "zh": "设置"
+    },
+    "nav_sources": {
+        "en": "Sources",
+        "zh": "数据源"
+    },
+    "nav_workspace": {
+        "en": "Workspace",
+        "zh": "工作区"
+    },
     "system_ready": {
         "en": "System Ready",
         "zh": "系统就绪"
@@ -128,6 +144,14 @@ TRANSLATIONS = {
     "webhook_url_label": {
         "en": "Enterprise WeChat Webhook URL",
         "zh": "企业微信 Webhook URL"
+    },
+    "manual_webhook_url_label": {
+        "en": "Manual Push Webhook URL",
+        "zh": "手动发布 Webhook URL"
+    },
+    "manual_webhook_help": {
+        "en": "Configure a separate webhook for manual publishing flow.",
+        "zh": "为手动发布流程配置独立的 Webhook 链接。"
     },
     "save_config_button": {
         "en": "💾 Save Configuration",

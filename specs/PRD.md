@@ -78,6 +78,10 @@
 - **Action:** Save configuration to `config.yaml`.
 - **操作：** 保存配置到 `config.yaml`。
 
+### 4.X Navigation & Language
+### 4.X 导航与语言
+- UI 提供中/英语言切换；左侧导航（页面入口）应随语言切换显示对应语言的名称（例如：设置/数据源/工作区）。
+
 ### 4.2 Source Management (Page 2)
 ### 4.2 来源管理 (页面 2)
 - **Source List:** View all sources with status (Enabled/Disabled), group, and last fetch time.
@@ -96,14 +100,24 @@
 - **编辑/删除：**
   - Modify existing sources including group assignment.
   - 修改现有来源，包括分组分配。
-  - Batch Delete: Select multiple sources to delete at once.
-  - 批量删除：选择多个来源一次性删除。
+  - Single List Interaction: Manage & batch actions happen in one table.
+  - 单列表交互：管理与批量操作在同一张表内完成。
+  - Type Editing: Source type supports reliable editing and persists after refresh.
+  - 类型编辑：数据源类型可稳定修改，刷新后不会回退到初始值。
+  - Stable Viewing: Editing multiple rows should not repeatedly reset the list position unexpectedly.
+  - 稳定查看：连续编辑时不应频繁把列表位置重置，避免影响定位当前查看的网址。
+  - Batch Delete: Select multiple sources in the same table, then delete.
+  - 批量删除：在同一张表中勾选多条来源后执行删除。
 - **Test Fetch:** Immediate trigger for a single source to validate selector/RSS.
 - **测试获取：** 立即触发单个来源以验证选择器/RSS。
 
 ### 4.3 Workspace (Page 3 - Guided Steps)
 ### 4.3 工作区 (页面 3 - 分步引导)
 Workspace 重构为 4 个“子页面/步骤”，步骤间有依赖关系：下一步仅使用并复用上一步的选择与结果，形成更明确的「配置 → 阅读 → 预览 → 发布」链路。
+
+- Workspace 顶部提供功能 Tab：
+  - 【自动化信息收集与发布】：现有 4 步工作流（数据源管理→阅读清单→新闻预览→发布设置）
+  - 【手动信息收集和发布】：以用户手动输入链接为核心，AI 解析并支持编辑与发布
 
 - **Step 1.1 数据源设置与管理**
   - 仅支持“数据源类型（Type）”筛选（不支持在此处新增/删除数据源；数据源维护仍在 Sources 页面）。
@@ -116,11 +130,20 @@ Workspace 重构为 4 个“子页面/步骤”，步骤间有依赖关系：下
 - **Step 1.3 新闻预览与查看**
   - 版本选择（vX.0）与状态展示。
   - Markdown 内容编辑 + 预览。
+  - 新闻预览的生成应以「1.2 阅读清单」为输入（默认以未读清单为准），生成新的预览版本用于发布。
   - 主题筛选生成新版本（Top N）。
 - **Step 1.4 发布通知设置和格式设置**
   - 配置并测试 Webhook。
   - 选择推送格式：Markdown / 图文 news / markdown_v2。
   - 智能格式解析、预览解析结果、确认推送。
+
+- **手动信息收集和发布（Tab）**
+  - Webhook 配置：支持配置独立于自动化流程的 Webhook 链接，并持久化缓存。
+  - 手动添加阅读链接：支持批量粘贴 URL，一键加入列表并去重。
+  - AI 解析：对列表中的 URL 抓取正文并生成结构化信息（标题、30 字内摘要、首图 URL、原文链接）。
+  - 手动编辑：支持对标题、摘要、图片、链接等字段进行编辑，并保存为可发布版本。
+  - 格式转换：支持一键转为【markdown_v2】与【图文 news】格式，复用 `core/llm_format.py`。
+  - 发布：支持以 Markdown 或转换后的 JSON payload 推送到企业微信 Webhook。
 
 ### 4.4 Background Logic
 ### 4.4 后台逻辑
@@ -157,6 +180,7 @@ image:
 
 notification:
   webhook_url: "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=..."
+  manual_webhook_url: "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=..."
 
 feishu:
   receiver_enabled: false

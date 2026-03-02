@@ -4,10 +4,18 @@ image:
   default_images:
     - static/images/ai_news.svg
 llm:
-  api_key: "YOUR_API_KEY_HERE"
-  base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
-  model_name: qwen-plus-2025-12-01
+  # Provider options: dashscope, volcengine, deepseek, moonshot, yi, anthropic, custom
   provider: dashscope
+  api_key: "YOUR_API_KEY_HERE"
+  # base_url: only needed for custom provider or when different from defaults
+  # base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  # Model examples:
+  #   - dashscope: qwen-plus-2025-12-01, qwen-max
+  #   - volcengine: doubao-pro-32k
+  #   - deepseek: deepseek-chat
+  #   - moonshot: moonshot-v1-8k
+  #   - anthropic: claude-3-5-sonnet-20241022, claude-3-opus-20240229
+  model_name: qwen-plus-2025-12-01
 notification:
   webhook_url: "YOUR_WEBHOOK_URL_HERE"
 system:

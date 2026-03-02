@@ -8,11 +8,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.config_manager import config_manager
 from core import i18n
+from core.ui_nav import render_sidebar_navigation
 
 st.set_page_config(page_title="Settings", page_icon="⚙️", layout="wide")
 
 def main():
     i18n.init_language()
+    render_sidebar_navigation(active="settings")
     
     # Language Selector (Top Right)
     col_title, col_lang = st.columns([8, 2])
