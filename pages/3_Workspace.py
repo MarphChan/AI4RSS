@@ -335,7 +335,7 @@ def _render_step_reading_list(selected_version_path, today_content):
 
     col_del, col_del_info = st.columns([1, 4])
     with col_del:
-        if st.button("删除选中", type="secondary", use_container_width=True):
+        if st.button("删除选中", type="secondary", use_container_width=True, key="reading_list_delete_btn"):
             ids = edited.loc[edited["delete"] == True, "id"].tolist() if "delete" in edited.columns else []
             ids = [str(x) for x in ids if x]
             deleted = reading_list_manager.delete_items(ids)
@@ -736,7 +736,7 @@ def _render_manual_tab():
 
     c_del, c_gen, c_max = st.columns([1, 1, 1])
     with c_del:
-        if st.button("删除选中", type="secondary", use_container_width=True):
+        if st.button("删除选中", type="secondary", use_container_width=True, key="manual_list_delete_btn"):
             ids = edited.loc[edited["delete"] == True, "id"].tolist()
             ids = [str(x) for x in ids if x]
             deleted = reading_list_manager.delete_items(ids)
