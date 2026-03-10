@@ -7,6 +7,7 @@ from datetime import time
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.config_manager import config_manager
+from core.llm import llm_engine
 from core import i18n
 from core.ui_nav import render_sidebar_navigation
 
@@ -234,6 +235,7 @@ def main():
             new_config["feishu"]["receiver_token"] = feishu_token
 
             config_manager.save(new_config)
+            llm_engine.reload()
             st.success(i18n.get_text("config_saved_success"))
             
             # Force reload to update state if needed, but not strictly necessary here

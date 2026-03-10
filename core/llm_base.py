@@ -68,11 +68,25 @@ class LLMBase:
         elif self.provider == "custom":
             base_url = self.config.get("base_url", "https://api.openai.com/v1")
         
+        # Allow overriding base_url for openai provider if specified
+        if self.provider == "openai":
+            custom_url = self.config.get("base_url")
+            if custom_url and custom_url.strip():
+                base_url = custom_url
+        
         self.openai_client = OpenAI(
             api_key=self.api_key,
             base_url=base_url
         )
         self.client = self.openai_client # Alias for compatibility with mixins
+
+    def reload(self):
+        """Reload configuration and re-initialize clients."""
+        self.config = config_manager.config["llm"]
+        self.provider = self.config.get("provider", "dashscope")
+        self.api_key = self.config.get("api_key", "")
+        self.model_name = self.config.get("model_name", "qwen-max")
+        self._init_clients()
 
     def _calculate_retry_delay(self, attempt: int, retry_after: Optional[float] = None) -> float:
         """Calculate exponential backoff delay with jitter."""

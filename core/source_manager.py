@@ -16,7 +16,14 @@ class SourceManager:
         
         try:
             with open(self.sources_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                # Sanitize NaN values which are valid in Python's json.load but invalid in standard JSON
+                # and can cause issues in Streamlit/frontend
+                for item in data:
+                    for k, v in item.items():
+                        if isinstance(v, float) and v != v:  # Check for NaN
+                            item[k] = ""
+                return data
         except json.JSONDecodeError:
             return []
 
@@ -71,11 +78,21 @@ class SourceManager:
         self._save_sources(self._sources)
         return new_source
 
+    def _sanitize_value(self, v):
+        """Sanitize a value to ensure it's JSON serializable."""
+        if isinstance(v, float) and v != v:  # Check for NaN
+            return ""
+        if hasattr(v, 'item'):  # Check for numpy types
+            return v.item()
+        return v
+
     def update_source(self, source_id: str, updates: Dict) -> Optional[Dict]:
         """Update an existing source."""
         for source in self._sources:
             if source['id'] == source_id:
-                source.update(updates)
+                # Sanitize updates
+                clean_updates = {k: self._sanitize_value(v) for k, v in updates.items()}
+                source.update(clean_updates)
                 self._save_sources(self._sources)
                 return source
         return None
@@ -89,7 +106,11 @@ class SourceManager:
         for source in self._sources:
             source_id = source.get("id")
             if source_id in updates_by_id:
-                source.update(updates_by_id[source_id])
+                updates = updates_by_id[source_id]
+                # Sanitize updates
+                clean_updates = {k: self._sanitize_value(v) for k, v in updates.items()}
+                
+                source.update(clean_updates)
                 updated_count += 1
 
         if updated_count > 0:

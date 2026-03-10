@@ -75,20 +75,8 @@ class ReadingListManager:
 
     def _save_raw(self, data: Dict[str, Any]) -> None:
         self._ensure_storage_dir()
-        import tempfile
-        dir_name = os.path.dirname(os.path.abspath(self.storage_path))
-        fd, temp_path = tempfile.mkstemp(dir=dir_name, suffix=".tmp")
-        try:
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
-            os.replace(temp_path, self.storage_path)
-        except Exception:
-            if os.path.exists(temp_path):
-                try:
-                    os.remove(temp_path)
-                except:
-                    pass
-            raise
+        with open(self.storage_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
 
     def add_url(
         self,

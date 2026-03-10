@@ -335,6 +335,10 @@ class NewsGenerator:
         if not ordered_items:
             return "No content fetched from provided URLs."
 
+        # Identify failed URLs
+        fetched_urls = set(item.get("url") for item in fetched_items if item.get("url"))
+        failed_urls = [u for u in normalized_urls if u not in fetched_urls]
+
         if progress_callback:
             progress_callback(f"Found {len(ordered_items)} pages. Summarizing...", 0.3)
 
@@ -392,6 +396,13 @@ class NewsGenerator:
             md_body += f"> **摘要**：{art['summary']}\n"
             md_body += f"> *来源：[{art.get('source_id', 'Link')}]({art['original_url']})*\n\n"
             md_body += "---\n\n"
+
+        if failed_urls:
+            md_body += "\n### ⚠️ Failed to Fetch\n"
+            md_body += "The following URLs could not be fetched (timeout, 404, or anti-bot protection):\n"
+            for u in failed_urls:
+                md_body += f"- {u}\n"
+            md_body += "\n"
 
         post = frontmatter.Post(md_body, **front_matter)
         final_content = frontmatter.dumps(post)

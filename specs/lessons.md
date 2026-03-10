@@ -1,5 +1,60 @@
 # 经验教训记录
 
+## 2026-03-10 Streamlit 重复 Key 导致组件冲突
+
+### 问题现象
+在 Streamlit 应用的 "1.2 阅读清单" 页面点击 "删除选中" 按钮时报错：`DuplicateWidgetID: There are multiple identical st.button widgets with the same generated key.`。
+
+### 根本原因
+代码中存在两个 `st.button("删除选中")`，分别位于 `_render_step_reading_list`（阅读清单页）和 `_render_manual_tab`（手动收集页）。
+虽然这两个函数在逻辑上属于不同的 "步骤" 或 "Tab"，但 Streamlit 的运行机制是每次交互重新运行整个脚本。当用户处于特定步骤（如 1.2）时，`_render_step_reading_list` 被调用，同时 `_render_manual_tab` 也被调用（因为它在另一个 Tab 中，而 Streamlit 会渲染所有 Tab 的内容）。
+由于两个按钮的 label 相同且未指定 `key` 参数，Streamlit 无法区分它们，从而抛出 DuplicateWidgetID 错误。
+
+### 解决思路
+为所有可能共存的同名组件显式指定唯一的 `key` 参数。
+
+### 实施步骤
+1. 修改 `pages/3_Workspace.py`。
+2. 为阅读清单页的删除按钮添加 `key="reading_list_delete_btn"`。
+3. 为手动收集页的删除按钮添加 `key="manual_list_delete_btn"`。
+
+## 2026-03-10 修改数据源时报错（NumPy 类型序列化）
+
+### 问题现象
+在 Streamlit 应用的 "数据源管理" 页面修改数据源配置（如启用/禁用）并保存时，报错 `TypeError: Object of type bool_ is not JSON serializable`。
+
+### 根本原因
+Streamlit 的 `data_editor` 组件返回的数据使用了 Pandas DataFrame。当从 DataFrame 中提取单个值（如布尔值）时，Pandas 可能会返回 NumPy 类型（如 `numpy.bool_`）而非 Python 原生类型（`bool`）。
+Python 标准库的 `json.dump` 默认不支持 NumPy 类型的序列化，导致在保存 `sources.json` 时抛出异常。
+
+### 解决思路
+在将数据保存到 JSON 文件之前，或者在更新内存中的数据源对象时，显式地将 NumPy 类型转换为 Python 原生类型。
+利用 NumPy 标量的 `.item()` 方法可以方便地将其转换为对应的 Python 标量。
+
+### 实施步骤
+1. 修改 `core/source_manager.py`。
+2. 添加 `_sanitize_value` 辅助方法，检查值是否具有 `.item` 属性（NumPy 类型的特征），如果有则调用它进行转换。
+3. 在 `update_source` 和 `update_sources_bulk` 方法中，使用 `_sanitize_value` 清洗传入的 `updates` 字典。
+
+## 2026-03-06 获取数据源报错（NaN 处理）
+
+### 问题现象
+用户在“获取数据源”或管理数据源时遇到报错。根本原因是 `sources.json` 文件中包含 `NaN` 值（例如 `"logo": NaN`）。Streamlit 前端或 Pandas 在处理这些 `NaN` 值时可能引发异常。
+
+### 根本原因
+1. Python 的 `json` 模块默认允许序列化 `NaN` 为 `NaN`，但这在标准 JSON 中是非法的。
+2. Pandas 处理缺失数据时会使用 `NaN`。如果直接将 DataFrame 转换为 dict 并保存为 JSON，就会引入 `NaN`。
+3. Streamlit 的 `data_editor` 在处理含有 `NaN` 的列（尤其是被强制指定为 `TextColumn` 时）可能会出现类型冲突或渲染错误。
+
+### 解决思路
+1. 在 `core/source_manager.py` 的 `_load_sources` 中，加载数据后立即清洗，将所有的 `NaN` 替换为 `""` 或 `None`。
+2. 在 `update_sources_bulk` 中，在更新源数据之前，先清洗 `updates` 字典中的 `NaN` 值。
+3. 确保 `sources.json` 始终包含合法的 JSON 数据。
+
+### 实施步骤
+1. 修改 `core/source_manager.py`，引入 `math` 模块，添加 `NaN` 检测和替换逻辑。
+2. 编写测试脚本 `tests/reproduce_fetch_error.py` 验证修复效果，并清理现有的 `sources.json` 文件。
+
 ## 2026-03-02 Claude Rate Limit 处理
 
 ### 问题背景
@@ -129,3 +184,56 @@ LLM 引擎层架构重构引入了不兼容：
 2. 更新 `core/fetcher.py` 中的 `_fetch_web` 方法，增加 Jina 错误检测与回退逻辑。
 3. 更新 `_extract_image_from_html`，支持 `img.get('data-src')`。
 
+## 2026-03-06 LLM 配置不生效与 Base URL 覆盖问题
+
+### 问题现象
+用户在设置页面配置了 Base URL、API Key 和模型（Provider 选为 OpenAI），但 AI 相关功能（如摘要、RSS 解析）仍然无法工作。
+
+### 根本原因
+1. **Base URL 被忽略**：`core/llm_base.py` 中对于 `openai` provider 硬编码了 `https://api.openai.com/v1`，导致用户在设置页面配置的 Custom Base URL 被忽略。用户虽然意图使用兼容 OpenAI 协议的其他服务（如 Dashscope），但选了 `openai` provider 后 Base URL 配置无效。
+2. **配置未实时生效**：`LLMEngine` 在模块导入时初始化，且作为全局单例存在。当用户在设置页面更新配置并保存后，`core/config_manager.py` 虽然更新了文件和内存中的配置，但 `LLMEngine` 实例并未重新加载配置，导致其仍持有旧的（或空的）凭证，直到应用重启。
+
+### 解决思路
+1. **允许 OpenAI Provider 覆盖 Base URL**：修改 `core/llm_base.py`，在 `provider == "openai"` 时，如果用户配置了 `base_url`，则优先使用用户配置的 URL。
+2. **实现热重载机制**：在 `LLMBase` 中添加 `reload()` 方法，用于重新读取配置并初始化客户端。在设置页面保存配置后，显式调用 `llm_engine.reload()`，确保更改立即生效。
+
+### 实施步骤
+1. 修改 `core/llm_base.py`，添加 `reload` 方法，并优化 Base URL 选择逻辑。
+2. 修改 `pages/1_Settings.py`，在保存配置后调用 `llm_engine.reload()`。
+
+## 2026-03-10 定时任务未执行
+
+### 问题现象
+定时发布的任务（如每日新闻生成和推送）没有成功执行，尽管服务是在线的。
+
+### 根本原因
+调度器逻辑存在缺陷。`SchedulerService` 每分钟检查一次配置变更（`_run_loop` 中的 `time.time() - last_config_check > 60`），每次检查都会调用 `_refresh_schedule`。
+在原实现中，`_refresh_schedule` 会无条件调用 `schedule.clear()` 清空所有任务，然后重新添加任务。
+如果 `_refresh_schedule` 的执行时间恰好与任务的计划执行时间（如 08:00:00）重合或极其接近，`schedule` 库可能会在任务执行前将其清除并重新添加。重新添加的任务会被 `schedule` 库视为“今天已过，安排在明天”，导致当天的任务被跳过。
+
+### 解决思路
+仅在配置（`fetch_time` 或 `push_time`）实际发生变化时才刷新调度表。如果配置未变，保持现有的调度任务不变，避免不必要的 `schedule.clear()`。
+
+### 实施步骤
+1. 修改 `core/scheduler.py`，在 `SchedulerService` 中增加 `_last_fetch_time`和 `_last_push_time` 成员变量。
+2. 在 `_refresh_schedule` 中增加判断逻辑，只有当时间配置发生变化时才执行 `schedule.clear()` 和重新调度。
+
+## 2026-03-10 阅读清单预览生成数量不足
+
+### 问题现象
+用户在 "1.2 阅读清单" 中添加了多条 URL，但在 "1.3 新闻预览" 点击生成预览时，生成的预览版本只包含部分条目（例如 5 条只生成了 2 条），且没有任何错误提示，界面显示 "Success"。
+
+### 根本原因
+1. **静默失败**：`core/generator.py` 中的 `generate_daily_news_from_urls` 在并发抓取 URL 时，如果某些 URL 抓取失败（如超时、404、反爬虫拦截），`fetcher` 会返回空列表或 `None`。
+2. **逻辑缺陷**：生成器逻辑中只收集成功抓取并摘要的条目，完全忽略了失败的条目。
+3. **缺乏反馈**：最终生成的 Markdown 内容仅包含成功条目，用户无法得知哪些条目被遗漏及其原因。
+
+### 解决思路
+1. **增强错误追踪**：在生成过程中记录所有请求的 URL 和实际成功的 URL。
+2. **用户可见反馈**：计算差集（请求 URL -成功 URL），将失败的 URL 列表追加到生成的 Markdown 文档末尾，作为一个显式的 "⚠️ Failed to Fetch" 章节。
+3. **保持流程连续**：部分失败不应阻断整个生成流程，确保用户至少能看到成功的部分。
+
+### 实施步骤
+1. 修改 `core/generator.py` 的 `generate_daily_news_from_urls` 方法。
+2. 在收集完 `fetched_items` 后，计算 `failed_urls`。
+3. 在构建 Markdown 内容时，如果存在 `failed_urls`，则在文末添加警告章节列出这些 URL。

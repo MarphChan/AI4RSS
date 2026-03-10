@@ -16,6 +16,8 @@ class SchedulerService:
         self._stop_event = threading.Event()
         self._thread = None
         self.is_running = False
+        self._last_fetch_time = None
+        self._last_push_time = None
 
     def start(self):
         """Start the scheduler in a background thread."""
@@ -57,11 +59,15 @@ class SchedulerService:
 
     def _refresh_schedule(self):
         """Reload schedule from config."""
-        schedule.clear()
-        
         config = config_manager.config["system"]
         fetch_time = config.get("fetch_time", "08:00")
         push_time = config.get("push_time", "09:30")
+
+        # Only refresh if schedule times have changed
+        if fetch_time == self._last_fetch_time and push_time == self._last_push_time:
+            return
+
+        schedule.clear()
         
         # Schedule Fetch
         schedule.every().day.at(fetch_time).do(self._job_fetch)
@@ -70,6 +76,9 @@ class SchedulerService:
         # Schedule Push
         schedule.every().day.at(push_time).do(self._job_push)
         logger.info(f"Scheduled auto-push at {push_time}")
+
+        self._last_fetch_time = fetch_time
+        self._last_push_time = push_time
 
     def _job_fetch(self):
         """Execute fetch job."""
