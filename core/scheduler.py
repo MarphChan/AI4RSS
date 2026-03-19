@@ -2,6 +2,7 @@ import schedule
 import time
 import threading
 import logging
+import frontmatter
 from datetime import datetime
 from core.config_manager import config_manager
 from core.generator import news_generator
@@ -99,12 +100,14 @@ class SchedulerService:
                 logger.warning("No news found for auto-push.")
                 return
 
-            # Check status (optional: enforce 'reviewed' status?)
-            # For MVP, we push whatever is there if it exists.
-            # But let's check if already pushed?
-            # pusher logic doesn't check status, but we can update file after push.
-            
-            success = pusher.push(content)
+            # Extract markdown body only (strip YAML frontmatter)
+            try:
+                post = frontmatter.loads(content)
+                push_content = post.content
+            except Exception:
+                push_content = content
+
+            success = pusher.push(push_content)
             if success:
                 logger.info("Scheduled push successful.")
             else:

@@ -176,11 +176,11 @@ class NewsGenerator:
         # 1. Fetch
         sources = source_manager.get_enabled_sources(target_groups=target_groups)
         if not sources:
-            return "No enabled sources found for the selected groups."
-            
+            return "ERROR: No enabled sources found for the selected groups."
+
         raw_items = fetcher.fetch_all(sources)
         if not raw_items:
-            return "No news found in the last 24 hours."
+            return "ERROR: No news found in the last 24 hours."
 
         # Sort by pub_date descending (newest first)
         raw_items.sort(key=lambda x: x.get('pub_date', ''), reverse=True)
@@ -198,9 +198,8 @@ class NewsGenerator:
         processed_articles = []
         total_items = len(raw_items)
         
-        # Use ThreadPoolExecutor for concurrent processing
-        # We can increase max_workers if needed, but 5 is a safe starting point
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        max_workers = config_manager.get("system.max_workers", 5)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
             # Create a map of future -> item index
             future_to_idx = {
                 executor.submit(self._process_single_item, item, idx): idx 
@@ -210,13 +209,14 @@ class NewsGenerator:
             completed_count = 0
             for future in as_completed(future_to_idx):
                 idx = future_to_idx[future]
+                article_meta = None
                 try:
                     article_meta = future.result()
                     if article_meta:
                         processed_articles.append(article_meta)
                 except Exception as e:
                     logger.error(f"Error processing item {idx}: {e}")
-                
+
                 completed_count += 1
                 if progress_callback:
                     # Update progress bar from 0.3 to 0.9
@@ -232,16 +232,16 @@ class NewsGenerator:
 
         # 3. Compile Markdown
         if progress_callback: progress_callback("Compiling Markdown...", 0.9)
-        
+
         today_str = datetime.now().strftime("%Y-%m-%d")
-        
+
         # Determine filepath and version
         filepath = self.get_next_version_filepath()
         filename = os.path.basename(filepath)
         # Extract version string (e.g., "v1.0")
         try:
             version_str = filename.split("-")[-1].replace(".md", "")
-        except:
+        except Exception:
             version_str = "v1.0"
 
         # Front Matter
@@ -257,11 +257,19 @@ class NewsGenerator:
         md_body = f"# 📅 {today_str} AI Daily News ({version_str})\n\n"
         
         for i, art in enumerate(processed_articles):
-            md_body += f"## {i+1}. {art['title']}\n"
-            if art['image_url']:
-                md_body += f"![]({art['image_url']})\n"
-            md_body += f"> **摘要**：{art['summary']}\n"
-            md_body += f"> *来源：[{art.get('source_id', 'Link')}]({art['original_url']})*\n\n"
+            title = art.get('title') or ''
+            image_url = art.get('image_url') or ''
+            summary = art.get('summary') or ''
+            source_id = art.get('source_id') or 'Link'
+            original_url = art.get('original_url') or ''
+            md_body += f"## {i+1}. {title}\n"
+            if image_url:
+                md_body += f"![]({image_url})\n"
+            md_body += f"> **摘要**：{summary}\n"
+            if original_url:
+                md_body += f"> *来源：[{source_id}]({original_url})*\n\n"
+            else:
+                md_body += f"> *来源：{source_id}*\n\n"
             md_body += "---\n\n"
 
         # Combine
@@ -287,7 +295,7 @@ class NewsGenerator:
     ) -> str:
         normalized_urls = [u.strip() for u in (urls or []) if u and str(u).strip()]
         if not normalized_urls:
-            return "No URLs provided."
+            return "ERROR: No URLs provided."
 
         if len(normalized_urls) > max_items:
             normalized_urls = normalized_urls[:max_items]
@@ -314,7 +322,8 @@ class NewsGenerator:
             return item
 
         total_fetch = len(normalized_urls)
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        max_workers = config_manager.get("system.max_workers", 5)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {executor.submit(_fetch_one, u): u for u in normalized_urls}
             fetched_count = 0
             for future in as_completed(futures):
@@ -333,7 +342,7 @@ class NewsGenerator:
         item_by_url = {x.get("url"): x for x in fetched_items if x.get("url")}
         ordered_items = [item_by_url[u] for u in normalized_urls if u in item_by_url]
         if not ordered_items:
-            return "No content fetched from provided URLs."
+            return "ERROR: No content fetched from provided URLs."
 
         # Identify failed URLs
         fetched_urls = set(item.get("url") for item in fetched_items if item.get("url"))
@@ -344,7 +353,7 @@ class NewsGenerator:
 
         processed_articles = []
         total_items = len(ordered_items)
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        with ThreadPoolExecutor(max_workers=config_manager.get("system.max_workers", 5)) as executor:
             future_to_idx = {
                 executor.submit(self._process_single_item, item, idx): idx
                 for idx, item in enumerate(ordered_items)
@@ -352,6 +361,7 @@ class NewsGenerator:
             completed_count = 0
             for future in as_completed(future_to_idx):
                 idx = future_to_idx[future]
+                article_meta = None
                 try:
                     article_meta = future.result()
                     if article_meta:
@@ -376,7 +386,7 @@ class NewsGenerator:
         filename = os.path.basename(filepath)
         try:
             version_str = filename.split("-")[-1].replace(".md", "")
-        except:
+        except Exception:
             version_str = "v1.0"
 
         front_matter = {
@@ -390,11 +400,19 @@ class NewsGenerator:
 
         md_body = f"# 📅 {today_str} AI Daily News ({version_str})\n\n"
         for i, art in enumerate(processed_articles):
-            md_body += f"## {i+1}. {art['title']}\n"
-            if art['image_url']:
-                md_body += f"![]({art['image_url']})\n"
-            md_body += f"> **摘要**：{art['summary']}\n"
-            md_body += f"> *来源：[{art.get('source_id', 'Link')}]({art['original_url']})*\n\n"
+            title = art.get('title') or ''
+            image_url = art.get('image_url') or ''
+            summary = art.get('summary') or ''
+            source_id = art.get('source_id') or 'Link'
+            original_url = art.get('original_url') or ''
+            md_body += f"## {i+1}. {title}\n"
+            if image_url:
+                md_body += f"![]({image_url})\n"
+            md_body += f"> **摘要**：{summary}\n"
+            if original_url:
+                md_body += f"> *来源：[{source_id}]({original_url})*\n\n"
+            else:
+                md_body += f"> *来源：{source_id}*\n\n"
             md_body += "---\n\n"
 
         if failed_urls:

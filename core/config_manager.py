@@ -1,3 +1,4 @@
+import copy
 import yaml
 import os
 from typing import Dict, Any
@@ -13,7 +14,9 @@ class ConfigManager:
             "push_time": "09:30",
             "timezone": "Asia/Shanghai",
             "time_period": 24,
-            "max_items": 20
+            "max_items": 20,
+            "max_workers": 5,
+            "fetch_article_images": False
         },
         "llm": {
             "provider": "dashscope",
@@ -44,27 +47,26 @@ class ConfigManager:
         """Load configuration from YAML file. Create with defaults if not exists."""
         if not os.path.exists(self.config_path):
             self._save_config(self.DEFAULT_CONFIG)
-            return self.DEFAULT_CONFIG
-        
+            return copy.deepcopy(self.DEFAULT_CONFIG)
+
         try:
             with open(self.config_path, 'r', encoding='utf-8') as f:
                 config = yaml.safe_load(f)
                 return self._merge_defaults(config, self.DEFAULT_CONFIG)
         except Exception as e:
             print(f"Error loading config: {e}. Using defaults.")
-            return self.DEFAULT_CONFIG
+            return copy.deepcopy(self.DEFAULT_CONFIG)
 
     def _merge_defaults(self, config: Dict, default: Dict) -> Dict:
-        """Deep merge config with defaults to ensure all keys exist."""
+        """Deep merge config with defaults to ensure all keys exist.
+        User-supplied empty lists are treated as valid values and honoured."""
         if not isinstance(config, dict):
             return default
-        
+
         result = default.copy()
         for key, value in config.items():
             if key in result and isinstance(result[key], dict) and isinstance(value, dict):
                 result[key] = self._merge_defaults(value, result[key])
-            elif key in result and isinstance(result[key], list) and isinstance(value, list) and not value and result[key]:
-                continue
             else:
                 result[key] = value
         return result

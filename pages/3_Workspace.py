@@ -88,12 +88,21 @@ def _render_version_bar(today_versions):
             st.info(f"📅 {datetime.now().strftime('%Y-%m-%d')} | {status_display}")
 
     with c_del:
-        if st.button("🗑️", help="Delete this version", type="secondary"):
-            if news_generator.delete_news(selected_version_path):
-                st.success("Deleted!")
+        confirm_key = f"_confirm_del_{os.path.basename(selected_version_path or 'none')}"
+        if not st.session_state.get(confirm_key):
+            if st.button("🗑️", help="删除此版本（需二次确认）", type="secondary"):
+                st.session_state[confirm_key] = True
                 st.rerun()
-            else:
-                st.error("Failed")
+        else:
+            if st.button("⚠️确认", help="确认删除，不可恢复", type="primary"):
+                st.session_state.pop(confirm_key, None)
+                if news_generator.delete_news(selected_version_path):
+                    st.rerun()
+                else:
+                    st.error("Failed")
+            if st.button("取消", key="cancel_del_btn"):
+                st.session_state.pop(confirm_key, None)
+                st.rerun()
 
     return selected_version_path, today_content
 
@@ -180,7 +189,7 @@ def _render_step_sources():
                 target_groups=target_groups,
                 max_items=max_items,
             )
-            if final_content.startswith("No"):
+            if final_content.startswith("ERROR:"):
                 st.error(final_content)
             else:
                 st.success(i18n.get_text("generation_complete_success"))
@@ -231,6 +240,7 @@ def _render_step_sources():
         )
 
         if not df_display.equals(edited_df):
+            any_saved = False
             for _, row in edited_df.iterrows():
                 source_id = row["id"]
                 original_rows = df[df["id"] == source_id]
@@ -239,14 +249,20 @@ def _render_step_sources():
                 original_row = original_rows.iloc[0]
 
                 updates = {}
-                if row["enabled"] != original_row["enabled"]:
+                if bool(row["enabled"]) != bool(original_row["enabled"]):
                     updates["enabled"] = bool(row["enabled"])
 
                 if updates:
                     source_manager.update_source(source_id, updates)
+                    any_saved = True
 
+            if any_saved:
+                # Use session flag so toast is visible after rerun
+                st.session_state["_workspace_source_saved"] = True
+                st.rerun()
+
+        if st.session_state.pop("_workspace_source_saved", False):
             st.toast("已保存")
-            st.rerun()
 
 def _render_step_reading_list(selected_version_path, today_content):
     st.subheader("1.2 阅读清单")
@@ -278,7 +294,6 @@ def _render_step_reading_list(selected_version_path, today_content):
                     preserve_order_if_exists=False,
                 )
                 st.toast("已加入未读")
-                st.session_state["workspace_step"] = "1.2 阅读清单"
                 st.rerun()
             else:
                 st.warning("请输入有效的 URL")
@@ -336,7 +351,12 @@ def _render_step_reading_list(selected_version_path, today_content):
     col_del, col_del_info = st.columns([1, 4])
     with col_del:
         if st.button("删除选中", type="secondary", use_container_width=True, key="reading_list_delete_btn"):
-            ids = edited.loc[edited["delete"] == True, "id"].tolist() if "delete" in edited.columns else []
+            if "delete" in edited.columns:
+                # Ensure boolean type and handle NaNs
+                ids = edited.loc[edited["delete"].fillna(False).astype(bool), "id"].tolist()
+            else:
+                ids = []
+            
             ids = [str(x) for x in ids if x]
             deleted = reading_list_manager.delete_items(ids)
             if deleted > 0:
@@ -351,17 +371,20 @@ def _render_step_reading_list(selected_version_path, today_content):
     if not changed.empty:
         for _, row in changed.iterrows():
             reading_list_manager.set_read_status(row["id"], bool(row["read"]))
-        st.session_state["workspace_step"] = "1.2 阅读清单"
         st.rerun()
 
     st.divider()
+    has_items = bool(rows)
     col_next, col_hint = st.columns([1, 4])
     with col_next:
-        if st.button("下一步：新闻预览", type="primary"):
+        if st.button("下一步：新闻预览", type="primary", disabled=not has_items):
             st.session_state["workspace_step"] = "1.3 新闻预览与查看"
             st.rerun()
     with col_hint:
-        st.caption("勾选“已读”即会移动到已读列表；取消勾选会回到未读。")
+        if not has_items:
+            st.caption("请先加入阅读清单再进行预览。")
+        else:
+            st.caption("勾选“已读”即会移动到已读列表；取消勾选会回到未读。")
 
 def _render_step_preview(selected_version_path, today_content):
     st.subheader("1.3 新闻预览与查看")
@@ -409,12 +432,11 @@ def _render_step_preview(selected_version_path, today_content):
                     progress_callback=update_progress,
                     max_items=int(preview_max_items),
                 )
-                if result.startswith("No"):
+                if result.startswith("ERROR:"):
                     st.error(result)
                 else:
                     st.success("已生成预览版本")
-                    if "version_selector" in st.session_state:
-                        del st.session_state["version_selector"]
+                    st.session_state.pop("version_selector", None)
                     st.rerun()
 
     st.divider()
@@ -480,7 +502,7 @@ def _render_step_preview(selected_version_path, today_content):
 
     with col_preview:
         st.subheader(i18n.get_text("live_preview_header"))
-        st.markdown(st.session_state[editor_key], unsafe_allow_html=True)
+        st.markdown(st.session_state[editor_key])
 
     st.divider()
     col_next, col_hint = st.columns([1, 4])
@@ -734,10 +756,17 @@ def _render_manual_tab():
         key="manual_links_editor",
     )
 
-    c_del, c_gen, c_max = st.columns([1, 1, 1])
+    # 先展示"最多解析条数"，再放操作按钮，避免用户直接点击生成而忽略条数设置
+    c_max_label, c_max_input = st.columns([1, 2])
+    with c_max_label:
+        st.caption("最多解析条数（1-30）")
+    with c_max_input:
+        manual_max_items = st.number_input("最多解析条数", min_value=1, max_value=30, value=10, label_visibility="collapsed")
+
+    c_del, c_gen = st.columns([1, 1])
     with c_del:
         if st.button("删除选中", type="secondary", use_container_width=True, key="manual_list_delete_btn"):
-            ids = edited.loc[edited["delete"] == True, "id"].tolist()
+            ids = edited.loc[edited["delete"].fillna(False).astype(bool), "id"].tolist()
             ids = [str(x) for x in ids if x]
             deleted = reading_list_manager.delete_items(ids)
             if deleted > 0:
@@ -745,9 +774,6 @@ def _render_manual_tab():
                 st.rerun()
             else:
                 st.info("未选择要删除的条目")
-
-    with c_max:
-        manual_max_items = st.number_input("最多解析条数", min_value=1, max_value=30, value=10, label_visibility="collapsed")
 
     with c_gen:
         if st.button("AI解析生成草稿", type="primary", use_container_width=True):
@@ -769,7 +795,7 @@ def _render_manual_tab():
                 progress_callback=update_progress,
                 max_items=int(manual_max_items),
             )
-            if result.startswith("No"):
+            if result.startswith("ERROR:"):
                 st.error(result)
             else:
                 latest = news_generator.get_today_versions()

@@ -1,4 +1,5 @@
 import logging
+import random
 import time
 from typing import Optional
 from openai import OpenAI
@@ -40,8 +41,12 @@ class LLMBase:
 
     def _init_clients(self):
         """Initialize OpenAI and Anthropic clients."""
-        if not self.api_key:
-            logger.warning("No API key configured")
+        if not self.api_key or not str(self.api_key).strip():
+            logger.warning(
+                "No API key configured for provider '%s'. "
+                "All LLM calls will fail. Please set the API key in Settings.",
+                self.provider,
+            )
             return
 
         if self.provider == "anthropic":
@@ -96,7 +101,6 @@ class LLMBase:
         # Exponential backoff: base_delay * 2^attempt
         delay = self.BASE_RETRY_DELAY * (2 ** attempt)
         # Add small jitter (±10%)
-        import random
         jitter = delay * 0.1 * random.random()
         return min(delay + jitter, self.MAX_RETRY_DELAY)
 

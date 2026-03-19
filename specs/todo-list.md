@@ -1,5 +1,55 @@
 ##任务列表：
 
+### 🔴 P1 - 代码逻辑 Bug（影响功能正确性）
+
+1. ✅ **[scheduler.py L97-107]** 定时推送内容包含 YAML frontmatter：`_job_push` 调用 `load_daily_news()` 返回原始文件内容（含 `---` frontmatter 头），直接传给 `pusher.push()` 发送 markdown，导致企业微信收到 YAML 元信息乱码。修复：先用 `frontmatter.loads()` 提取 `post.content` 再推送。
+
+2. ✅ **[generator.py L132-137]** 图片生成功能虽在设置页面开放配置，但生成逻辑为 `pass` 占位符从未执行，用户开启"启用图片生成"无任何效果，应移除该误导性配置项或补全实现。→ 已在 Settings 中添加明确提示"该功能尚未激活"。
+
+3. ✅ **[3_Workspace.py L183 / L417]** 错误检测用字符串前缀 `result.startswith("No")` 判断失败，若正常新闻标题包含"No"开头（如"Nobel Prize..."）会被误判为错误。应改用明确的错误标志（如异常或特定返回码）。→ generator.py 错误返回改为 `"ERROR:"` 前缀，Workspace 统一用 `startswith("ERROR:")` 判断。
+
+4. ✅ **[3_Workspace.py L745]** 手动 tab 删除逻辑使用 `edited["delete"] == True` 而非安全类型转换，data_editor 返回 numpy.bool_ 时会导致删除失效（阅读清单 L341 已用 `.fillna(False).astype(bool)` 修复，manual tab 未同步修复）。→ 已同步修复。
+
+5. ✅ **[3_Workspace.py L421]** 生成预览版本后执行 `del st.session_state["version_selector"]`，若版本选择器 Widget 从未渲染（空版本列表场景），会抛出 KeyError 崩溃。应改用 `st.session_state.pop("version_selector", None)`。→ 已修复。
+
+6. ✅ **[generator.py L260-264 / L394-399]** Markdown 编译时 `art['source_id']`、`art['original_url']`、`art['summary']` 若为 None，会输出字符串 `"None"` 进入文档。应加 `or ''` 兜底处理。→ 已修复两处编译逻辑。
+
+7. ✅ **[config_manager.py L68]** `_merge_defaults` 逻辑：当 config.yaml 中 list 字段为空时 `continue` 跳过，导致用户清空 `default_images` 列表后仍被默认值覆盖，无法真正清空。应将空 list 视为有效值进行合并。→ 已移除 elif 空列表跳过逻辑。
+
+8. ✅ **[3_Workspace.py L233-249]** 数据源启用开关：`st.toast("已保存")` 之后立即 `st.rerun()`，用户永远看不到 toast 反馈。应将 rerun 放在下一个条件分支或使用 `time.sleep(0.3)` 短暂延迟（或改为仅在有实际变更时才 rerun）。→ 改用 session_state flag，rerun 后再显示 toast。
+
+9. ✅ **[2_Sources.py L315-317]** 批量测试抓取按钮将所有被测数据源在内存中强制设为 `s['enabled'] = True`，会影响后续来自 `sources` 列表的读取逻辑，且不会还原。应使用临时副本而非修改原始对象。→ 已改为 `dict(s, enabled=True)` 浅拷贝。
+
+---
+
+### 🟡 P2 - 使用体验问题（影响操作流畅度）
+
+10. ✅ **[3_Workspace.py L91]** 删除版本文件（🗑️ 按钮）无确认弹窗，单击即不可撤销删除。应增加 `st.dialog` 或二次确认机制。→ 已实现基于 session_state 的两步确认：点击后显示"⚠️确认"和"取消"按钮。
+
+11. ✅ **[3_Workspace.py L366-368]** "下一步：新闻预览"按钮在阅读清单为空时仍可点击，跳转后展示空白步骤，用户体验差。应在阅读清单为空时禁用或提示该按钮。→ 已加 `disabled=not has_items` 及提示文字。
+
+12. ✅ **[3_Workspace.py L488]** 内容编辑器预览使用 `unsafe_allow_html=True`，若新闻内容来自外部 URL 含恶意 HTML/JS，存在 XSS 风险。应移除该参数或对内容进行 HTML 转义。→ 已移除 `unsafe_allow_html=True`。
+
+13. ✅ **[2_Sources.py L132-155]** `batch_candidates` 在 session_state 中跨模式持久化，用户从"解析文本"切换到"按主题搜索"后，仍显示旧结果。每次切换模式或点击搜索/分析按钮时应清除旧候选列表。→ 已在模式切换时自动清理 `batch_candidates`。
+
+14. ✅ **[1_Settings.py L161-191]** 飞书接入配置区域的所有标签（"启用本地接收服务"、"监听地址"、"端口"、"Token"等）均为硬编码中文，未接入 i18n 系统，切换英文界面后该区域标签不变。→ 已在 i18n.py 新增飞书相关 key，Settings 改用 `i18n.get_text()` 调用。
+
+15. ✅ **[3_Workspace.py L757 / L761]** 手动 tab 中"最多解析条数"数字输入框位置在"AI解析生成草稿"按钮旁边但视觉上不够突出，用户容易忽略该参数直接点击生成，建议调整布局或增加说明文字。→ 已将"最多解析条数"提到按钮行之前单独显示。
+
+16. ✅ **[3_Workspace.py L281]** 手动添加阅读链接后 `st.session_state["workspace_step"] = "1.2 阅读清单"` 是多余赋值（当前已在该步骤），可直接 `st.rerun()` 即可，无实际影响但代码冗余。→ 已移除冗余赋值。
+
+---
+
+### 🟢 P3 - 性能与代码质量
+
+17. ✅ **[fetcher.py L85-86]** 每个无图片的 RSS 条目都额外发起独立 HTTP 请求获取页面图片（N+1 请求），20 条 RSS 最多触发 20 次额外请求，显著拖慢抓取速度。建议将此行为改为可选（默认关闭），或在 `fetch_all` 并发中合并处理。→ 已通过 `system.fetch_article_images`（默认 False）配置控制，用户可在 config.yaml 手动开启。
+
+18. ⏭️ **[deduplicator.py L43-49]** 标题相似度去重使用 O(n²) 算法（每条与所有已见标题比对），数据量大时性能急剧下降。→ 当前 max_items 上限 30，实际影响可忽略，暂不优化。
+
+19. ⏭️ **[reading_list_manager.py L224-232]** `update_from_drag_labels` 方法定义但在整个 UI 层从未被调用（拖拽功能未实现），属于死代码，建议清理。→ 该方法有测试覆盖（tests/ 中使用），保留待拖拽功能实现时使用。
+
+20. ✅ **[llm_base.py L44]** API key 为空时跳过初始化但无用户提示，直到调用时才以隐晦错误失败。应在 `_init_clients` 中当 key 为空时记录更友好的警告日志，提示用户在设置页配置。→ 已改为带有 provider 名称和指引的 warning 日志。
+
 ##已完成任务：
 1. 【已完成】手动信息收集和发布前，也需要配置webhook链接，且链接需要缓存
 2. 【已完成】在系统配置中增加默认图片URL链接配置，当新闻没有图片url时，使用默认图片url，支持设置多个默认url，每次使用按顺序使用，直到使用完所有默认url

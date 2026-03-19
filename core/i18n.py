@@ -519,6 +519,39 @@ TRANSLATIONS = {
         "en": "⚠️ Invalid JSON format.",
         "zh": "⚠️ JSON 格式无效。"
     },
+    # Feishu Receiver
+    "feishu_receiver_header": {
+        "en": "Feishu Link Integration",
+        "zh": "飞书转发链接接入"
+    },
+    "feishu_enable_receiver": {
+        "en": "Enable local receiver service",
+        "zh": "启用本地接收服务"
+    },
+    "feishu_enable_receiver_help": {
+        "en": "Start an HTTP service locally to receive links forwarded via Feishu and add them to the unread list.",
+        "zh": "开启后会在本机启动一个 HTTP 服务，用于接收飞书转发的链接并写入未读清单。"
+    },
+    "feishu_host_label": {
+        "en": "Listen Address",
+        "zh": "监听地址"
+    },
+    "feishu_host_help": {
+        "en": "Keep 127.0.0.1 for local only; use 0.0.0.0 for LAN access.",
+        "zh": "一般保持 127.0.0.1；若需局域网访问可改为 0.0.0.0"
+    },
+    "feishu_port_label": {
+        "en": "Port",
+        "zh": "端口"
+    },
+    "feishu_token_label": {
+        "en": "Token (optional)",
+        "zh": "Token（可选）"
+    },
+    "feishu_token_help": {
+        "en": "If set, include ?token=... in the callback URL for simple verification.",
+        "zh": "若设置 Token，请在回调 URL 上携带 ?token=... 用于简单校验"
+    },
     # Status
     "status_unknown": {
         "en": "Unknown",

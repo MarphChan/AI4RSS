@@ -1,5 +1,144 @@
 # 经验教训记录
 
+## 2026-03-16 try 块内变量在 except 后的 progress_callback 中被误引用
+
+### 问题现象
+`generate_daily_news` 和 `generate_daily_news_from_urls` 中，若 `future.result()` 抛出异常（第一次迭代），在 `progress_callback` 里访问 `article_meta['title']` 会触发 `NameError`；若非第一次迭代，则错误地使用上一轮的 `article_meta` 产生误导性进度信息。
+
+### 根本原因
+`article_meta` 赋值语句在 `try` 块内，一旦 `except` 分支执行，该变量在本轮循环中未被赋值。紧随 try-except 之后的 progress 逻辑对此无感知。
+
+### 解决思路
+在 `try` 块开头预先将 `article_meta` 初始化为 `None`（放在 try 块外侧），确保无论是否异常，后续代码都能安全判断 `if article_meta`。
+
+### 实施步骤
+1. 在 `for future in as_completed(...)` 循环体开头、try 块之前，添加 `article_meta = None`。
+2. 涉及文件：`core/generator.py`（两处并发处理循环）。
+
+---
+
+## 2026-03-16 裸 except 子句掩盖真实异常
+
+### 问题现象
+`generator.py` 中两处 `except:` 使用无类型裸捕获，会拦截 `KeyboardInterrupt`、`SystemExit` 等 `BaseException` 子类，导致无法正常终止进程，且 logger 捕获不到具体错误信息。
+
+### 根本原因
+编写容错逻辑时图省事使用裸 `except`，忽略了 Python 异常层级中 `BaseException` 和 `Exception` 的区别。
+
+### 解决思路
+所有 except 子句应明确指定捕获类型。对于"防御性兜底"场景，最宽泛也应写 `except Exception`；对于能预测到的错误（如解析 ID 格式），应写 `except (ValueError, IndexError)`。
+
+### 实施步骤
+1. 将 `core/generator.py` 的两处 `except:` 改为 `except Exception:`。
+
+---
+
+## 2026-03-16 RSS 无日期条目 fallback datetime.now() 导致旧内容污染
+
+### 问题现象
+部分 RSS Feed 的条目不包含 `published_parsed` 或 `updated_parsed` 字段，原代码将这些条目的 `pub_date` 设为 `datetime.now()`，使它们始终通过 `pub_date > cutoff_time` 过滤，混入当日新闻。
+
+### 根本原因
+`datetime.now()` 作为 fallback 会让"时间不明"的条目伪装成"最新内容"，破坏基于时间窗口的过滤逻辑。
+
+### 解决思路
+无日期条目应视为"时间未知"而非"当前时间"。可采用以下策略之一：
+1. 将无日期条目直接跳过（保守策略）。
+2. 给无日期条目分配一个固定的、必定早于 cutoff 的时间（如 epoch 0），使其自然被过滤掉。
+3. 保留无日期条目但加上标记，由下游逻辑决定是否纳入。
+
+### 实施步骤
+1. 修改 `core/fetcher.py` `_fetch_rss` 方法：将 `else: pub_date = datetime.now()` 改为将无日期条目跳过或赋值为 `None` 后过滤。
+
+---
+
+## 2026-03-16 fetch_all() 未使用 as_completed 遍历 futures
+
+### 问题现象
+`fetcher.fetch_all()` 中使用 `for future in futures:` 遍历 futures 字典，按提交顺序逐个阻塞等待。若第一个任务耗时 10 秒，其余 4 个已在 1 秒内完成的任务结果只能白白等待，并发优势大打折扣。
+
+### 根本原因
+对 futures 字典直接迭代只是遍历字典的 key（即 Future 对象），并不代表按完成顺序处理；调用 `.result()` 会阻塞直到该特定 future 完成，而非等待"最先完成的那个"。
+
+### 解决思路
+改用 `concurrent.futures.as_completed(futures)` 迭代，像 `generate_daily_news_from_urls` 中那样，优先处理已完成的任务。
+
+### 实施步骤
+1. 修改 `core/fetcher.py` `fetch_all()` 方法，将 `for future in futures:` 改为 `for future in as_completed(futures):`，并引入对应 import。
+
+---
+
+## 2026-03-16 ConfigManager._load_config 返回 DEFAULT_CONFIG 引用
+
+### 问题现象
+当 `config.yaml` 不存在时，`_load_config` 直接 `return self.DEFAULT_CONFIG`，返回的是类级别字典的引用。后续对该配置对象的修改（如 `config_manager.save(new_config)` 中的 `self._config = new_config` 之外的就地修改）会污染类变量，影响同进程内其他地方读取到的"默认值"。
+
+### 根本原因
+Python 中类变量是所有实例共享的，直接返回引用而不复制会导致意外的状态共享。
+
+### 解决思路
+返回前用 `copy.deepcopy` 创建深拷贝，确保每次获取的默认配置彼此独立。
+
+### 实施步骤
+1. 在 `core/config_manager.py` 顶部引入 `import copy`。
+2. 将 `_load_config` 中的 `return self.DEFAULT_CONFIG` 改为 `return copy.deepcopy(self.DEFAULT_CONFIG)`。
+
+---
+
+## 2026-03-16 函数体内 import 语句
+
+### 问题现象
+`core/llm_base.py` 的 `_calculate_retry_delay` 方法内有 `import random`，每次调用该方法都会触发一次（虽被缓存，但仍是不必要的查找）。
+
+### 根本原因
+将 import 放在函数内部是反模式，除非有明确的延迟加载需求（如可选依赖）。
+
+### 解决思路
+将所有无条件 import 移至模块顶部，保持代码规范。
+
+### 实施步骤
+1. 在 `core/llm_base.py` 顶部已有 import 区域添加 `import random`，删除函数内的 `import random`。
+
+---
+
+## 2026-03-16 多处硬编码 ThreadPoolExecutor max_workers=5
+
+### 问题现象
+`core/fetcher.py`、`core/generator.py`（3 处）均使用 `ThreadPoolExecutor(max_workers=5)` 硬编码并发数，在不同网络环境或机器性能下无法灵活调整。
+
+### 根本原因
+开发阶段取用一个"够用的"固定值，未考虑可配置性。
+
+### 解决思路
+将并发数提取为配置项（如 `system.max_workers`）或至少定义为模块级常量，方便统一调整。
+
+### 实施步骤
+1. 在 `core/config_manager.py` 的 DEFAULT_CONFIG 中添加 `"max_workers": 5`。
+2. 各处使用 `config_manager.get("system.max_workers", 5)` 读取。
+
+---
+
+## 2026-03-13 Streamlit data_editor 布尔列筛选失效
+
+### 问题现象
+在 Streamlit 应用的 "1.2 阅读清单" 页面，用户勾选了 "删除" 复选框并点击 "删除选中" 按钮，但没有任何条目被删除，界面提示 "未选择要删除的条目"。
+
+### 根本原因
+Streamlit 的 `data_editor` 返回的 DataFrame 中，复选框列（CheckboxColumn）的数据类型可能不稳定，尤其是在混合了手动添加和从文件加载的数据时。
+1. `edited` DataFrame 中的 `delete` 列可能包含 `NaN`（对于未勾选或新行）或 `None`。
+2. 直接使用 `edited["delete"] == True` 进行筛选时，如果列中包含 `NaN`，Pandas 可能会产生不符合预期的结果，或者筛选出空集。
+3. `st.data_editor` 在某些情况下（如列初始化为 `False` 但被用户交互修改后）返回的列类型可能不是纯布尔类型。
+
+### 解决思路
+增强 DataFrame 的布尔筛选逻辑，确保类型安全和 `NaN` 处理。
+1. 使用 `fillna(False)` 将所有 `NaN` 或 `None` 视为 `False`（未选中）。
+2. 使用 `astype(bool)` 强制转换为布尔类型。
+3. 使用布尔索引 `loc[mask]` 替代 `== True` 比较。
+
+### 实施步骤
+1. 修改 `pages/3_Workspace.py`。
+2. 将筛选逻辑从 `edited.loc[edited["delete"] == True, "id"]` 修改为 `edited.loc[edited["delete"].fillna(False).astype(bool), "id"]`。
+
 ## 2026-03-10 Streamlit 重复 Key 导致组件冲突
 
 ### 问题现象

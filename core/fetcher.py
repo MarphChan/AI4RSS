@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import time
 from typing import List, Dict, Optional
 import logging
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urljoin
 from core.config_manager import config_manager
 
@@ -29,9 +29,10 @@ class Fetcher:
         results = []
         enabled_sources = [s for s in sources if s.get('enabled', True)]
         
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        max_workers = config_manager.get("system.max_workers", 5)
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {executor.submit(self._fetch_single_source, source): source for source in enabled_sources}
-            for future in futures:
+            for future in as_completed(futures):
                 try:
                     items = future.result()
                     results.extend(items)
@@ -72,14 +73,17 @@ class Fetcher:
                 if published_parsed:
                     pub_date = datetime.fromtimestamp(time.mktime(published_parsed))
                 else:
-                    pub_date = datetime.now() # Fallback
+                    # Skip entries without a date to avoid treating stale content as fresh
+                    logger.debug(f"Skipping entry without date: {entry.get('title', 'No Title')}")
+                    continue
 
                 # Filter last 24h
                 if pub_date > cutoff_time:
                     # Extract image
                     picurl = self._extract_image_from_rss_entry(entry)
-                    # If no image found in RSS, try fetching the original page (optional, but requested)
-                    if not picurl and entry.get('link'):
+                    # If no image found in RSS, optionally fetch original page for image.
+                    # Disabled by default to avoid N+1 HTTP requests; enable via system.fetch_article_images.
+                    if not picurl and entry.get('link') and config_manager.get("system.fetch_article_images", False):
                         picurl = self._fetch_page_image(entry.get('link'))
 
                     items.append({

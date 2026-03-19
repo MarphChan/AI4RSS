@@ -78,8 +78,9 @@ def main():
         st.subheader(i18n.get_text("image_config_header"))
         
         enable_image = st.checkbox(
-            i18n.get_text("enable_image_gen_label"), 
-            value=current_config["image"].get("enable_generation", True)
+            i18n.get_text("enable_image_gen_label"),
+            value=current_config["image"].get("enable_generation", True),
+            help="⚠️ 该功能当前为预留配置，AI 图片生成能力尚未激活，开关不影响实际行为。",
         )
         
         default_images_list = current_config["image"].get("default_images", [])
@@ -158,36 +159,36 @@ def main():
 
         st.divider()
 
-        st.subheader("飞书转发链接接入")
+        st.subheader(i18n.get_text("feishu_receiver_header"))
         feishu_cfg = current_config.get("feishu", {})
 
         feishu_enabled = st.checkbox(
-            "启用本地接收服务",
+            i18n.get_text("feishu_enable_receiver"),
             value=bool(feishu_cfg.get("receiver_enabled", False)),
-            help="开启后会在本机启动一个 HTTP 服务，用于接收飞书转发的链接并写入未读清单。"
+            help=i18n.get_text("feishu_enable_receiver_help"),
         )
 
         c_f1, c_f2, c_f3 = st.columns([2, 1, 2])
         with c_f1:
             feishu_host = st.text_input(
-                "监听地址",
+                i18n.get_text("feishu_host_label"),
                 value=str(feishu_cfg.get("receiver_host", "127.0.0.1")),
-                help="一般保持 127.0.0.1；若需局域网访问可改为 0.0.0.0"
+                help=i18n.get_text("feishu_host_help"),
             )
         with c_f2:
             feishu_port = st.number_input(
-                "端口",
+                i18n.get_text("feishu_port_label"),
                 min_value=1,
                 max_value=65535,
                 value=int(feishu_cfg.get("receiver_port", 8765)),
-                step=1
+                step=1,
             )
         with c_f3:
             feishu_token = st.text_input(
-                "Token（可选）",
+                i18n.get_text("feishu_token_label"),
                 value=str(feishu_cfg.get("receiver_token", "")),
                 type="password",
-                help="若设置 Token，请在回调 URL 上携带 ?token=... 用于简单校验"
+                help=i18n.get_text("feishu_token_help"),
             )
 
         st.divider()

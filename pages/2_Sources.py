@@ -73,8 +73,15 @@ def main():
                 i18n.get_text("discovery_mode_label"),
                 [i18n.get_text("mode_parse_text"), i18n.get_text("mode_topic_search")],
                 horizontal=True,
-                label_visibility="collapsed"
+                label_visibility="collapsed",
+                key="batch_discovery_mode",
             )
+
+            # Clear stale candidates when mode is switched
+            prev_mode = st.session_state.get("_batch_mode_prev")
+            if prev_mode is not None and prev_mode != mode:
+                st.session_state.pop("batch_candidates", None)
+            st.session_state["_batch_mode_prev"] = mode
 
             # Group input (shared)
             batch_group = st.text_input(i18n.get_text("source_group_batch_label"), placeholder="Default", key="batch_group_input")
@@ -312,9 +319,8 @@ def main():
             if st.button(i18n.get_text("batch_test_fetch_button")):
                 ids_to_test = st.session_state.get("sources_selected_ids", [])
                 if ids_to_test:
-                    sources_to_test = [s for s in sources if s['id'] in ids_to_test]
-                    for s in sources_to_test:
-                        s['enabled'] = True
+                    # Use shallow copies to avoid mutating in-memory source objects
+                    sources_to_test = [dict(s, enabled=True) for s in sources if s['id'] in ids_to_test]
 
                     with st.spinner(i18n.get_text("fetching_spinner")):
                         results = fetcher.fetch_all(sources_to_test)
